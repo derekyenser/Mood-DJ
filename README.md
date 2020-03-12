@@ -7,7 +7,7 @@ Our Objective is to create a software to create custom playlist for a user. Thes
 **Features of Mood DJ:**
 
   1. Has interactive UI
-  *Contains over 230,000 songs
+  2. Contains over 230,000 songs
   *links to spotify API
   *creates custom playlist
   *Uses predetermined mood options
