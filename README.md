@@ -8,9 +8,9 @@ Our Objective is to create a software to create custom playlist for a user. Thes
 
   1. Has interactive UI
   2. Contains over 230,000 songs
-  *links to spotify API
-  *creates custom playlist
-  *Uses predetermined mood options
+  3. links to spotify API
+  4. creates custom playlist
+  5. Uses predetermined mood options
   
   
 
