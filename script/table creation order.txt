@@ -1,0 +1,36 @@
+order created
+artist
+genre
+songs
+attributes
+user
+playlist 
+song_have_many_artist
+
+source C:/Users/derek/OneDrive/Documents/cs341 Software Engineering/
+
+BEGIN;
+
+DROP TABLE IF EXISTS attributes;
+
+CREATE TABLE attributes(
+attribute_num INTEGER,
+popularity INTEGER,
+accousticness DECIMAL(15,15),
+danceability DECIMAL(15,15),
+duration_ms INTEGER,
+energy DECIMAL(15,15),
+instrumentalness DECIMAL(15,15),
+key_s VARCHAR(45),
+liveness DECIMAL(15,15),
+loudness DECIMAL(65,30),
+mode_A VARCHAR(20),
+speechiness DECIMAL(15,15),
+tempo DECIMAL(65,30),
+time_signature VARCHAR(45),
+valence DECIMAL(15,15),
+song_num INTEGER,
+genre_num INTEGER,
+primary key(attribute_num),
+CONSTRAINT attributes_song_num_FK FOREIGN KEY (song_num) REFERENCES Songs(song_num),
+CONSTRAINT attributes_genre_num_FK FOREIGN KEY (genre_num) REFERENCES Genre(genre_num));
