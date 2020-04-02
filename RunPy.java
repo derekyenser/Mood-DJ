@@ -4,17 +4,14 @@ import java.util.*;
 public class RunPy {
 
 	public static BufferedReader inp;
+	public static String cmd;
 
-	public static void print(String s) { // Prints the input from the python script
-		System.out.println(s);
+	public RunPy(String path) {
+		cmd = path;
 	}
 
-
-	public static void main(String[] args) {
-
+	public void run() {
 		String s;
-		String cmd = "PythonScript\\dist\\pullSavedSongs\\pullSavedSongs.exe"; //Command to run the python script
-
 		try {
 
 			Process p = Runtime.getRuntime().exec(cmd); //Process to run the script
@@ -32,5 +29,9 @@ public class RunPy {
 		catch (Exception err) {
 			err.printStackTrace();
 		}
+	}
+
+	private static void print(String s) { // Prints the input from the python script
+		System.out.println(s);
 	}
 }
