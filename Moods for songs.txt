@@ -14,25 +14,3 @@ select track_name, artists.artist_name, songs.genre_num,song_genre, danceability
 
 Custom mood
 attribtues(danceability, valence, Energy) 
-
-
-String cMood = "select track_name, artists.artist_name, songs.genre_num,song_genre, valence, danceability, energy from songs, attributes, artists, genre where songs.song_num = attributes.song_num and attributes.genre_num = genre.genre_num and genre.artist_name = artists.artist_name";
-Scanner in = Scanner(system.in);
-System.out.print("Enter Valence(between 0 and 1): ");
-String v = in.nextString();
- 
-if( v <= '.25')
-	 cmood += "and valence <= '.25'";
-	
-else if ( v > '.25' && <= '.5')
-	cmood += "and valence > '.25' and valence <= '.5'";
-
-else if ( v > '.5' && <= '.75')
-	cmood += "and valence > '.5' and valence <= '.75'";
-
-else if ( v > '.75')
-	cmood += "and valence > '.75'";
-
-else
-	System.out.print("Error must be between 0 and 1");
-
