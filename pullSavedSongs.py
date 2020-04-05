@@ -7,13 +7,12 @@
 # database where it stores the information in.
 #NOTICE: Anywhere you see "sys.stdout.write", this is for piping output to the parent Java program that calls this script
 
-import os
-import sys
+from os import remove
+from sys import stdout, stdin
 import spotipy
-import pandas as pd
+from pandas import DataFrame
 import tkinter as tk
 import mysql.connector
-import spotipy.util as util
 
 sp, entry1 = None, None  # Global variables for sp: Spotify Token for login and getSavedSongs  entry1: GUI box input
 root = tk.Tk() # GUI box pointer
@@ -47,20 +46,20 @@ def authenticate(username):  # Request account access and handle token athentica
         # user-library-read is the type of access we are requesting
         # client_id and client_secret come from app created in Spotify developer account
         # redirect_uri is the place it takes you to login
-        token = util.prompt_for_user_token(username, 'user-library-read', 
+        token = spotipy.util.prompt_for_user_token(username, 'user-library-read', 
         client_id='be3ff50517384a24907a8eed8c80bca1', 
         client_secret='7e38a4328695403b902462610db339c6',
         redirect_uri='http://google.com/')
     except:
-        os.remove(f".cache-{username}")
+        remove(f".cache-{username}")
     #Create spotify object
     sp = spotipy.Spotify(auth=token)
     user = sp.current_user()
     displayName = user['display_name']
 
 def getLikedSongs():  # Get all the songs in a user's Liked Songs playlist including artist name and all Spotify attributes
-    sys.stdout.write("Getting songs from Spotify...\n")
-    sys.stdout.flush()
+    stdout.write("Getting songs from Spotify...\n")
+    stdout.flush()
     global sp
     songs = []
     count = 0 # To track progress
@@ -76,8 +75,8 @@ def getLikedSongs():  # Get all the songs in a user's Liked Songs playlist inclu
         feat.update([('track', tName) , ('artist', aName)])
         songs.append(feat) # Adds track name, artist name, and song attributes to a data structure(in this case a list)
         count += 1
-    sys.stdout.write(str(count) + '\n')
-    sys.stdout.flush()
+    stdout.write(str(count) + '\n')
+    stdout.flush()
     while tracks['next']: # Continue to grab the next 20 songs until there are no more (and/or until it reaches a max) and repeats above steps
         tracks = sp.next(tracks)
         for i in tracks['items']:
@@ -87,19 +86,19 @@ def getLikedSongs():  # Get all the songs in a user's Liked Songs playlist inclu
             feat.update([('track', tName) , ('artist', aName)])
             songs.append(feat)
             count += 1
-        sys.stdout.write(str(count) + '\n')
-        sys.stdout.flush()
-    sys.stdout.write("Found " + str(count) + " songs\n")
-    sys.stdout.flush()
+        stdout.write(str(count) + '\n')
+        stdout.flush()
+    stdout.write("Found " + str(count) + " songs\n")
+    stdout.flush()
     return songs
 
 def makeConection(credentials): # Connect to database
     return mysql.connector.connect(**credentials)
 
 def addToDB(cnx, info): #Adds all songs, attributes, and artists to the appropriate tables in the database
-    sys.stdout.write("Adding to database...\n")
-    sys.stdout.flush()
-    frame = pd.DataFrame.from_dict(info) # Convert the list data structure from getLikedSongs to a dataframe for ease of use
+    stdout.write("Adding to database...\n")
+    stdout.flush()
+    frame = DataFrame.from_dict(info) # Convert the list data structure from getLikedSongs to a dataframe for ease of use
     count = 0 # Track progress
     for index, song in frame.iterrows():
         insertArtist(song["artist"], cnx) # Put artist in the artists table
@@ -115,8 +114,8 @@ def addToDB(cnx, info): #Adds all songs, attributes, and artists to the appropri
         # Keep track of progress
         count += 1
         if count % 50 == 0:
-            sys.stdout.write(str(count) + '\n')
-            sys.stdout.flush()
+            stdout.write(str(count) + '\n')
+            stdout.flush()
 
 def insertArtist(value, cnx):  # Inserts the artist info into the artists table
     try:
@@ -224,16 +223,31 @@ def insertAttributes(values, track, cnx):  # Inserts the attributes into the att
         print("Coundn't add " + str(track))
 
 def main():
-    # Database credentials required for connection
-    config = {
-    'user': 'root',
-    'password': '8Vnuxc3$',
-    'host': '127.0.0.1', # IP address unless database is on local machine, then 127.0.0.1
-    'database': 'class_mooddj', # database name
-    'raise_on_warnings': True
-    }
-    sys.stdout.write("Starting...\n")
-    sys.stdout.flush()
+    creds = []
+    s = stdin.readline().strip()
+    while s not in ['Done','Never']:
+        creds.append(s)
+        s = stdin.readline().strip()
+    if s == 'Done': # If you used the getDBCreds method in java to use the DB on your system (recommended)
+        config = {
+        'user': creds[0],
+        'password': creds[1],
+        'host': creds[2], # IP address unless database is on local machine, then 127.0.0.1
+        'database': creds[3], # database name
+        'raise_on_warnings': True
+        }
+    else:
+        # My database credentials required for connection
+        config = {
+        'user': 'root',
+        'password': '8Vnuxc3$',
+        'host': '127.0.0.1', # IP address unless database is on local machine, then 127.0.0.1
+        'database': 'class_mooddj', # database name
+        'raise_on_warnings': True
+        }
+
+    stdout.write("Starting...\n")
+    stdout.flush()
 
     displayWindow()
     songInfo = getLikedSongs()
@@ -241,9 +255,9 @@ def main():
     addToDB(connection, songInfo)
 
     connection.close()
-    sys.stdout.write('Done\n')
-    sys.stdout.flush()
-    sys.stdout.write("quit")
+    stdout.write('Done\n')
+    stdout.flush()
+    stdout.write("quit")
 
 if __name__ == "__main__":
     main()
