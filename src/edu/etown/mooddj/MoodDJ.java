@@ -43,37 +43,6 @@ public class MoodDJ extends Application {
 		
 	}
 	
-	public void showSignInPage() {
-		try {
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MoodDJ.class.getResource("view/SignInPage.fxml"));
-            GridPane signInPage = (GridPane) loader.load();
-
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(signInPage);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		
-	}
-	
-	public void showSignUpPage() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MoodDJ.class.getResource("view/SignUpPage.fxml"));
-			GridPane signUpPage = (GridPane) loader.load();
-			Scene scene = new Scene(signUpPage);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	
 	
 	public Stage getPrimaryStage() {
