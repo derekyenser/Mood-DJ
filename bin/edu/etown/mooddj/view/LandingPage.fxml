@@ -19,7 +19,7 @@
    </rowConstraints>
    <children>
       <Button fx:id="LoginBtn" mnemonicParsing="false" onAction="#showSignInPage" prefHeight="26.0" prefWidth="71.0" text="Login" GridPane.rowIndex="1" />
-      <Button fx:id="SignUpBtn" mnemonicParsing="false" onAction="#showSignUpPage" text="Sign Up" GridPane.rowIndex="2" />
+      <Button fx:id="SignUpBtn" mnemonicParsing="false" onAction="#showNewUserPage" prefHeight="25.0" prefWidth="71.0" text="Sign Up" GridPane.rowIndex="2" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mood DJ">
          <font>
             <Font size="18.0" />

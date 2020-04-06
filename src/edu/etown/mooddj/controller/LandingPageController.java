@@ -6,12 +6,8 @@ import java.util.ResourceBundle;
 
 import edu.etown.mooddj.MoodDJ;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -46,12 +42,12 @@ public class LandingPageController implements Initializable{
 		
 	}
 	
-	public void showSignUpPage(ActionEvent event) {
+	public void showNewUserPage(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MoodDJ.class.getResource("view/SignUpPage.fxml"));
-			GridPane signUpPage = (GridPane) loader.load();
-			Scene scene = new Scene(signUpPage);
+			loader.setLocation(MoodDJ.class.getResource("view/NewUserPage.fxml"));
+			GridPane newUserPage = (GridPane) loader.load();
+			Scene scene = new Scene(newUserPage);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
 			window.show();

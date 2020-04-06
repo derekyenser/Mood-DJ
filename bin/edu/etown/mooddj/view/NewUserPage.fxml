@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="275.0" prefWidth="300.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="275.0" prefWidth="300.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.etown.mooddj.controller.NewUserPageController">
    <columnConstraints>
       <ColumnConstraints halignment="CENTER" />
    </columnConstraints>
@@ -18,8 +18,8 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
    </rowConstraints>
    <children>
-      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" text="Login With Spotify" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Create New Account" GridPane.rowIndex="2" />
+      <Button fx:id="loginSpotifyBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" text="Login With Spotify" GridPane.rowIndex="1" />
+      <Button fx:id="newAccountBtn" mnemonicParsing="false" onAction="#showSignUpPage" prefHeight="25.0" prefWidth="141.0" text="Create New Account" GridPane.rowIndex="2" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mood DJ">
          <font>
             <Font size="18.0" />
