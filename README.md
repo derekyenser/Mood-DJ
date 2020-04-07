@@ -12,5 +12,9 @@ Our Objective is to create a software to create custom playlist for a user. Thes
   4. creates custom playlist
   5. Uses predetermined mood options
   
+  **How to clone Mood DJ**
+  1. Download and run the scripts for tables in Mysql
+  2. 
+  
   
 
