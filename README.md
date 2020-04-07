@@ -14,7 +14,8 @@ Our Objective is to create a software to create custom playlist for a user. Thes
   
   **How to clone Mood DJ**
   1. Download and run the scripts for tables in Mysql
-  2. 
+  2. Download the 
+  3. Use the
   
   
 
