@@ -2,7 +2,7 @@
 
 **Objective**
 
-Our Objective is to create a software to create custom playlist for a user. These playlists will be created by mood and using user prefrences. Mood DJ will use Spotify API for users with a Spotify account to get their preferences, and create a playlist from spotify directly. Otherwise, Mood DJ will ask questions to get user preference. After a mood(happy, sad, high energy, dance) or custom mood(valence, energy, danceability) is selected a playlsit will be generated for the user based on their preferences from our 230,000 song mySQL database.
+Our Objective is to create a software to create custom playlist for a user. These playlists will be created by mood and using user prefrences. Mood DJ will use Spotify API for users with a Spotify account to get their preferences, and create a playlist from Spotify directly. Otherwise, Mood DJ will ask questions to get user preferences. After a mood(happy, sad, high energy, dance) or custom mood(valence, energy, danceability) is selected a playlist will be generated for the user based on their preferences from our 230,000 song mySQL database.
 
 **Features of Mood DJ:**
 
