@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+// class is used to create a custom mood and prints a statement that will eventually be written to sql to return music
 public class CustomMood {
 
 	public static void main(String [] args) {
@@ -24,6 +24,9 @@ public class CustomMood {
 		System.out.print(cMood);
 
 	}
+	// val is used for a user to select their prefered valence level between 0 and 1 and has 4 ranges
+	// 0-.25, .25-.5, .5-.75 , .75 - 1, anything out of that range will cause an error
+	
 	public static String val(double v) {
 		double custom1 = 0;
 		double custom2 = 0;
@@ -66,7 +69,8 @@ public class CustomMood {
 		}
 		return result;
 	}
-
+	// dance is used for a user to select their prefered danceability level between 0 and 1 and has 4 ranges
+	// 0-.25, .25-.5, .5-.75 , .75 - 1, anything out of that range will cause an error
 	public static String dance(double d) {
 		double custom3 = 0;
 		double custom4 = 0;
@@ -110,6 +114,8 @@ public class CustomMood {
 		return result;
 	}
 
+	// energy is used for a user to select their prefered energy level between 0 and 1 and has 4 ranges
+	// 0-.25, .25-.5, .5-.75 , .75 - 1, anything out of that range will cause an error
 	public static String energy(double e) {
 		double custom5 = 0;
 		double custom6 = 0;
