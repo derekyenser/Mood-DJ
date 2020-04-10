@@ -1,0 +1,8 @@
+cd /path/to/backups
+mysql -u root -p --default-character-set=utf8
+# Switch to database 
+USE spotifySongs;
+SET names 'utf8';
+SET autocommit=0 ;
+SOURCE backup.sql;
+COMMIT ;
