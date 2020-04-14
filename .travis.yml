@@ -1,0 +1,8 @@
+language: java
+
+os: linux
+dist: xenial
+jdk: oraclejdk8
+
+script:
+  - ./gradlew build
