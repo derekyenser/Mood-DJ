@@ -1,0 +1,12 @@
+Here is the Google Drive link to the executable for the python script: https://drive.google.com/open?id=1IR_CADhIzp_-GWWvr_WhYEKmvo47lSf5
+
+Directions:
+1. Use the link to download the zip file
+2. Extract the folder to wherever the Java project is. You should still see the src and bin folders, dont navigiate further than that
+3. If you have the RunPy class I uploaded to Github in your project, you should be able to copy paste the few lines of code in the
+runPyTest to your code and hopefully everything works. For testing puroses I added a getDBCreds method to the RunPy class which allows you
+to use the database on your computer. If you don't include that method the program will try to connect to the one on my pc which wont work
+and the program will crash
+
+ALSO, I will try to get the exe smaller so I can upload it directly to Github. Right now its at around 30MB and it needs to be smaller
+than 25MB.
