@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="275.0" prefWidth="300.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.etown.mooddj.controller.LandingPageController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="275.0" prefWidth="300.0" styleClass="background" stylesheets="@mooddj.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.etown.mooddj.controller.LandingPageController">
    <columnConstraints>
       <ColumnConstraints halignment="CENTER" />
    </columnConstraints>
@@ -20,7 +20,7 @@
    <children>
       <Button fx:id="LoginBtn" mnemonicParsing="false" onAction="#showSignInPage" prefHeight="26.0" prefWidth="71.0" text="Login" GridPane.rowIndex="1" />
       <Button fx:id="SignUpBtn" mnemonicParsing="false" onAction="#showNewUserPage" prefHeight="25.0" prefWidth="71.0" text="Sign Up" GridPane.rowIndex="2" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mood DJ">
+      <Text fill="#e8e8e8" strokeType="OUTSIDE" strokeWidth="0.0" text="Mood DJ">
          <font>
             <Font size="18.0" />
          </font>

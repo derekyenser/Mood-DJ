@@ -1,0 +1,19 @@
+.background{
+	-fx-background-color: #2e3131;
+}
+.button-mood{
+	-fx-background-color: #22a7f0;
+	-fx-pref-height: 60;
+	-fx-pref-width: 60;
+	-fx-wrap-text: true;
+	-fx-text-alignment: CENTER;
+	-fx-text-fill: #e8e8e8;
+}
+.button-mood:pressed{
+	-fx-background-color: #2574a9;
+	-fx-pref-height: 60;
+	-fx-pref-width: 60;
+	-fx-wrap-text: true;
+	-fx-text-alignment: CENTER;
+	-fx-text-fill: #e8e8e8;
+}

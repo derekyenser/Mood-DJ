@@ -1,9 +1,14 @@
 package edu.etown.mooddj.model;
 
-public class SongModel {
+public class Song {
 	private int songNum;
 	private String trackID;
 	private String trackName;
+	
+	
+	Song(){
+		
+	}
 	
 	public int getSongNum() {
 		return songNum;

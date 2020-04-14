@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
@@ -11,59 +12,69 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="275.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="361.0" prefWidth="528.0" styleClass="background" stylesheets="@mooddj.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.etown.mooddj.controller.CustomMoodController">
    <children>
-      <Text layoutX="14.0" layoutY="29.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Custom Mood" wrappingWidth="138.2154541015625" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <GridPane hgap="10.0" layoutY="79.0" prefHeight="171.0" prefWidth="300.0" vgap="10.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="RIGHT" maxWidth="84.66666666666667" minWidth="53.33335367838542" prefWidth="70.99997965494792" />
-            <ColumnConstraints maxWidth="85.33331298828125" minWidth="10.0" prefWidth="51.0" />
-            <ColumnConstraints maxWidth="108.99999999999997" minWidth="10.0" prefWidth="108.99999999999997" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-         </rowConstraints>
+      <VBox alignment="TOP_CENTER" layoutX="114.0" layoutY="62.0" spacing="5.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 10;" styleClass="vbox-content-panel" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="114.0" AnchorPane.rightAnchor="114.0" AnchorPane.topAnchor="62.0">
          <children>
-            <Label text="Valence" GridPane.rowIndex="1">
-               <tooltip>
-                  <Tooltip text="Describes the musical positiveness conveyed by a track." wrapText="true" />
-               </tooltip></Label>
-            <Label text="Energy" GridPane.rowIndex="2" />
-            <Label text="Danceability" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Slider blockIncrement="0.01" majorTickUnit="0.1" max="1.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Slider blockIncrement="0.01" max="1.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Slider blockIncrement="0.01" max="1.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Custom Mood" wrappingWidth="148.2154541015625">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Separator prefWidth="200.0" />
+            <TextFlow prefHeight="44.0" prefWidth="280.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="For each of the 3 options, give a number between 0 and 1." />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </TextFlow>
+            <GridPane hgap="10.0" prefHeight="171.0" prefWidth="300.0" vgap="10.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="LEFT" maxWidth="84.66666666666667" minWidth="53.33335367838542" prefWidth="70.99997965494792" />
+                  <ColumnConstraints maxWidth="85.33331298828125" minWidth="10.0" prefWidth="51.0" />
+                  <ColumnConstraints maxWidth="108.99999999999997" minWidth="10.0" prefWidth="108.99999999999997" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
+               </rowConstraints>
+               <children>
+                  <Label text="Valence" GridPane.rowIndex="1">
+                     <tooltip>
+                        <Tooltip text="Describes the musical positiveness conveyed by a track." wrapText="true" />
+                     </tooltip>
+                  </Label>
+                  <Label text="Energy" GridPane.rowIndex="2" />
+                  <Label text="Danceability" GridPane.rowIndex="3" />
+                  <TextField fx:id="valenceTextField" alignment="CENTER" onAction="#setValenceSliderValue" text="0.5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="energyTextField" alignment="CENTER" onAction="#setEnergySliderValue" text="0.5" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="danceabilityTextField" alignment="CENTER" onAction="#setDanceabilitySliderValue" text="0.5" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Slider fx:id="valenceSlider" blockIncrement="0.01" majorTickUnit="0.1" max="1.0" value="0.5" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Slider fx:id="energySlider" blockIncrement="0.01" max="1.0" value="0.5" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Slider fx:id="danceabilitySlider" blockIncrement="0.01" max="1.0" value="0.5" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+               </padding>
+            </GridPane>
          </children>
          <padding>
-            <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+            <Insets left="5.0" right="5.0" top="5.0" />
          </padding>
-      </GridPane>
-      <TextFlow layoutX="14.0" layoutY="35.0" prefHeight="44.0" prefWidth="280.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="40.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="For each of the 3 options, give a number between 0 and 1." />
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </TextFlow>
+      </VBox>
       <ButtonBar layoutX="113.0" layoutY="230.0" prefHeight="26.0" prefWidth="280.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Cancel" />
-            <Button defaultButton="true" mnemonicParsing="false" text="Continue" />
+          <Button mnemonicParsing="false" onAction="#loadMoodSelectionPage" text="Cancel" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#loadPlaylistPage" text="Continue" />
         </buttons>
       </ButtonBar>
    </children>

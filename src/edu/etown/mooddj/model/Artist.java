@@ -1,6 +1,6 @@
 package edu.etown.mooddj.model;
 
-public class ArtistModel {
+public class Artist {
 	private String artistName;
 
 	public String getArtistName() {
