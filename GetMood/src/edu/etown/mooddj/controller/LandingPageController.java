@@ -19,42 +19,18 @@ public class LandingPageController implements Initializable{
 	private Button SignUpBtn;
 	
 	public void showSignInPage(ActionEvent event) {
-		try {
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MoodDJ.class.getResource("view/SignInPage.fxml"));
-            GridPane signInPage = (GridPane) loader.load();
-			
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(signInPage);
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		MoodDJ.loadPage("view/SignInPage.fxml", event);
 		
 	}
 	
 	public void showNewUserPage(ActionEvent event) {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MoodDJ.class.getResource("view/NewUserPage.fxml"));
-			GridPane newUserPage = (GridPane) loader.load();
-			Scene scene = new Scene(newUserPage);
-			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-			window.setScene(scene);
-			window.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MoodDJ.loadPage("view/NewUserPage.fxml", event);
+		
+	}
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
 		
 	}
 }
