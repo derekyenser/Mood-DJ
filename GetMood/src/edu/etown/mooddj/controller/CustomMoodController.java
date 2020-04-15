@@ -52,10 +52,30 @@ public class CustomMoodController implements Initializable{
 	}
 	
 	public void loadMoodSelectionPage(ActionEvent event) {
-		MoodDJ.loadPage("view/MoodSelectionPage.fxml", event);
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MoodDJ.class.getResource("view/MoodSelectionPage.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	public void loadPlaylistPage(ActionEvent event) {
-		MoodDJ.loadPage("view/PlaylistPage.fxml", event);
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MoodDJ.class.getResource("view/PlaylistPage.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

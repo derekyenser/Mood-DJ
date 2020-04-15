@@ -13,9 +13,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
+
 <AnchorPane prefHeight="361.0" prefWidth="528.0" styleClass="background" stylesheets="@mooddj.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.etown.mooddj.controller.SignInPageController">
    <children>
-      <VBox layoutX="146.0" layoutY="81.0" prefHeight="200.0" prefWidth="237.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 10;" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="146.0" AnchorPane.topAnchor="81.0">
+      <VBox layoutX="146.0" layoutY="81.0" prefHeight="200.0" prefWidth="237.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 10;">
          <children>
             <GridPane alignment="CENTER" hgap="10.0" prefHeight="275.0" prefWidth="300.0" vgap="10.0">
                <padding>

@@ -2,7 +2,6 @@ package edu.etown.mooddj;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.*;
@@ -19,23 +18,23 @@ public class MoodDJ extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		//try {
+		try {
 			//Parent root = FXMLLoader.load(getClass().getResource("view/MoodSelectionPage.fxml"));
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(MoodDJ.class.getResource("view/MoodSelectionPage.fxml"));
-//			
-//			Parent root = loader.load();
-//			Scene scene = new Scene(root);
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MoodDJ.class.getResource("view/MoodSelectionPage.fxml"));
+			
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
 
 			this.primaryStage = primaryStage;
 			this.primaryStage.setTitle("Mood DJ");
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
-//		}catch (IOException e) {
-//			e.printStackTrace();
-		//}
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		showLandingPage();
+		//showLandingPage();
 		//showSignInPage();
 
 	}
@@ -56,19 +55,7 @@ public class MoodDJ extends Application {
 		}
 
 	}
-	public static void loadPage(String file, ActionEvent event) {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MoodDJ.class.getResource(file));
-			Parent root = loader.load();
-			Scene scene = new Scene(root);
-			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-			window.setScene(scene);
-			window.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}

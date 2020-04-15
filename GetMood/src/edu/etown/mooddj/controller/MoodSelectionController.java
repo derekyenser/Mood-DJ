@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
 import edu.etown.mooddj.MoodDJ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +29,18 @@ public class MoodSelectionController implements Initializable{
 	
 	
 	public void loadCustomMoodPage(ActionEvent event) {
-		MoodDJ.loadPage("view/CustomMoodPage.fxml",event);
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MoodDJ.class.getResource("view/CustomMoodPage.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void sizeTextFieldActive(ActionEvent event) {
