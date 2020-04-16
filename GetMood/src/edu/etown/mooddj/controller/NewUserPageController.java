@@ -17,21 +17,18 @@ public class NewUserPageController implements Initializable{
 	private Button loginSpotifyBtn;
 	@FXML
 	private Button newAccountBtn;
-	
-	public void showSignUpPage(ActionEvent event) {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MoodDJ.class.getResource("view/SignUpPage.fxml"));
-			GridPane signUpPage = (GridPane) loader.load();
-			Scene scene = new Scene(signUpPage);
-			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-			window.setScene(scene);
-			window.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	/**
+	 * The method called to display the page to sign up new users. 
+	 * Currently called by the Button newAccountButton.
+	 * @param event
+	 * @return Nothing
+	 */
+	public void loadSignUpPage(ActionEvent event) {
+		MoodDJ.loadPage("view/SignUpPage.fxml", event);
 		
+	}
+	public void loadLandingPage(ActionEvent event) {
+		MoodDJ.loadPage("view/LandingPage.fxml",event);
 	}
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
