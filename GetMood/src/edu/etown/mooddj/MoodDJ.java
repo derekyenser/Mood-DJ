@@ -13,30 +13,13 @@ import javafx.scene.layout.GridPane;
 public class MoodDJ extends Application {
 
 	private Stage primaryStage;
-	//private GridPane rootLayout;
-	private BorderPane rootLayout;
 
 	@Override
 	public void start(Stage primaryStage) {
-
-//		try {
-//			//Parent root = FXMLLoader.load(getClass().getResource("view/MoodSelectionPage.fxml"));
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(MoodDJ.class.getResource("view/MoodSelectionPage.fxml"));
-//			
-//			Parent root = loader.load();
-//			Scene scene = new Scene(root);
-
-			this.primaryStage = primaryStage;
-			this.primaryStage.setTitle("Mood DJ");
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
-//		}catch (IOException e) {
-//			e.printStackTrace();
-//		}
-
-		showLandingPage();
-		//showSignInPage();
+		
+		//loadInitialScreen("view/MoodSelectionPage.fxml",primaryStage);
+		//loadInitialScreen("view/LandingPage.fxml",primaryStage);
+		loadInitialScreen("view/CustomMoodPage.fxml",primaryStage);
 
 	}
 
@@ -56,7 +39,12 @@ public class MoodDJ extends Application {
 		}
 
 	}
-	
+	/**
+	 * A method for loading and displaying the given fxml file.
+	 * @param file This is the fxml file that will be loaded
+	 * @param event
+	 * @return Nothing
+	 */
 	public static void loadPage(String file, ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -71,7 +59,23 @@ public class MoodDJ extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void loadInitialScreen(String file, Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MoodDJ.class.getResource(file));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			this.primaryStage = primaryStage;
+			this.primaryStage.setTitle("Mood DJ");
+			primaryStage.setResizable(false);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}

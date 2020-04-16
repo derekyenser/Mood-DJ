@@ -26,11 +26,22 @@ public class MoodSelectionController implements Initializable{
 	@FXML
 	private TextField sizeTextField;
 	
-	
+	/**
+	 * The method called to display the page for selecting a custom mood . 
+	 * Currently called by the Button customMoodButton.
+	 * @param event
+	 * @return Nothing
+	 */
 	public void loadCustomMoodPage(ActionEvent event) {
 		MoodDJ.loadPage("view/CustomMoodPage.fxml", event);
 	}
 	
+	/**
+	 * Checks whether sizeCheckBox is selected. If sizeCheckBox is selected, 
+	 * sizeTextField will be editable.
+	 * @param event
+	 * @return Nothing
+	 */
 	public void sizeTextFieldActive(ActionEvent event) {
 		if(sizeCheckBox.isSelected()) {
 			sizeTextField.setEditable(true);

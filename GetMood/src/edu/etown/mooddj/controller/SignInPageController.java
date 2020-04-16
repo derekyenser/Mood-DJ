@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.etown.mooddj.MoodDJ;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,6 +38,9 @@ public class SignInPageController implements Initializable{
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+	}
+	public void loadLandingPage(ActionEvent event) {
+		MoodDJ.loadPage("view/LandingPage.fxml",event);
 	}
 	
 	@Override

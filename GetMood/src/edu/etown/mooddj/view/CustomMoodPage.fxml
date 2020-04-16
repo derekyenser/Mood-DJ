@@ -74,7 +74,7 @@
       <ButtonBar layoutX="113.0" layoutY="230.0" prefHeight="26.0" prefWidth="280.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#loadMoodSelectionPage" text="Cancel" />
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#loadPlaylistPage" text="Continue" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#createCustomMood" text="Continue" />
         </buttons>
       </ButtonBar>
    </children>

@@ -1,3 +1,6 @@
+*{
+	//-fx-base: #2e3131;
+}
 .background{
 	-fx-background-color: #2e3131;
 }
@@ -5,19 +8,142 @@
 	-fx-background-color: #e8e8e8;
 	-fx-background-radius: 10;
 }
+/*******************************************************************************
+ *                                                                             *
+ * Button                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+.button{
+	-fx-background-color: transparent;
+	-fx-border-color: white;
+	-fx-border-width: 2;
+	-fx-text-fill: white;
+}
+.button:hover{
+	-fx-background-color: rgba(255,255,255,.3);
+	-fx-border-color: white;
+	-fx-border-width: 2;
+	-fx-text-fill: white;
+}
+.button:pressed{
+	-fx-background-color: white;
+	-fx-border-color: white;
+	-fx-border-width: 2;
+	-fx-text-fill: black;
+}
+.button-light{
+	-fx-background-color: #bfbfbf;
+	-fx-border-color: transparent;
+	-fx-background-radius: 0;
+	-fx-text-fill: black;
+}
+.button-light:hover{
+	-fx-background-color: #bfbfbf, rgba(255,255,255,.3);
+	-fx-border-color: transparent;
+	-fx-text-fill: black;
+}
+.button-light:hover:pressed{
+	-fx-background-color: #2e3131;
+	-fx-border-color: transparent;
+	-fx-text-fill: white;
+}
+.button:default{
+	-fx-background-color: #22a7f0;
+	-fx-border-color: white;
+}
+.button:default:hover:pressed{
+	-fx-background-color: white;
+	-fx-text-fill: black;
+}
+.button:default:hover{
+	-fx-background-color: #22a7f0,rgba(255,255,255,.3);
+	-fx-border-color: white;
+}
 .button-mood{
 	-fx-background-color: #22a7f0;
-	-fx-pref-height: 60;
-	-fx-pref-width: 60;
+	-fx-border-color: transparent;
+	-fx-pref-height: 65;
+	-fx-pref-width: 65;
+	-fx-wrap-text: true;
+	-fx-text-alignment: CENTER;
+	-fx-text-fill: white;
+}
+.button-mood:hover{
+	-fx-background-color: #23bef7;
+	-fx-border-color: transparent;
+	//-fx-pref-height: 60;
+	//-fx-pref-width: 60;
+	-fx-wrap-text: true;
+	-fx-text-alignment: CENTER;
+	-fx-text-fill: white;
+}
+.button-mood:pressed{
+	-fx-background-color: #1474a8;
+//	-fx-pref-height: 60;
+//	-fx-pref-width: 60;
 	-fx-wrap-text: true;
 	-fx-text-alignment: CENTER;
 	-fx-text-fill: #e8e8e8;
 }
-.button-mood:pressed{
-	-fx-background-color: #2574a9;
-	-fx-pref-height: 60;
-	-fx-pref-width: 60;
-	-fx-wrap-text: true;
-	-fx-text-alignment: CENTER;
-	-fx-text-fill: #e8e8e8;
+.circle-button{
+	-fx-border-color: white;
+	-fx-border-width: 2.5;
+	-fx-background-radius: 5em;
+	-fx-border-radius: 5em;
+	-fx-min-width: 28px;
+	-fx-min-height: 28px;
+	-fx-max-width: 28px;
+	-fx-max-height: 28px;
+}
+/*******************************************************************************
+ *                                                                             *
+ * Checkbox                                                                    *
+ *                                                                             *
+ ******************************************************************************/
+.check-box .box {    
+	-fx-background-color: transparent; 
+	-fx-border-color: #2e3131;
+	-fx-border-width: 2;
+	-fx-padding: 2;    
+}
+
+.check-box .mark {
+    	-fx-background-color: transparent;
+    	-fx-background-insets: 0;
+    	-fx-padding: 4;   
+    	-fx-shape: "M0,4H2L3,6L6,0H8L4,8H2Z";    
+}
+.check-box:indeterminate .mark {
+    	-fx-background-color: -fx-mark-color;
+    	-fx-shape: "M0,0H8V2H0Z";
+    	-fx-scale-shape: false;
+}
+.check-box:selected .mark {
+    	//-fx-background-color: -fx-mark-color;
+	-fx-background-color: #2e3131;    
+}
+/*******************************************************************************
+ *                                                                             *
+ * Slider                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+.slider .thumb {
+    	-fx-background-color: transparent,rgb(76,81,86), linear-gradient(to bottom,rgb(200,202,207) 0%,rgb(180,182,187) 100%), linear-gradient(to bottom,rgb(222,223,228) 0%,rgb(195,199,203) 100%);
+    	-fx-background-insets: 0,1,2,3;
+    	-fx-background-radius: 1.0em;
+    	-fx-padding: 7;
+}
+.slider .track {
+    	-fx-background-color: transparent,rgb(76,81,86),rgb(191,195,199);
+    	-fx-background-insets: 0,1,2;    
+    	-fx-background-radius: 5;
+    	-fx-padding: 3.5;
+}
+/*******************************************************************************
+ *                                                                             *
+ * Text                                                                        *
+ *                                                                             *
+ ******************************************************************************/
+.text{
+	-fx-text-fill: white;
 }
