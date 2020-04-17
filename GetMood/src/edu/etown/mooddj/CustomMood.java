@@ -1,54 +1,84 @@
+package edu.etown.mooddj;
 
 import java.util.Scanner;
 
 public class CustomMood {
-
-	public static void main(String [] args) {
-		Scanner in = new Scanner(System.in);
-		String cMood = "select track_name, artists.artist_name, songs.genre_num,song_genre, valence, danceability, energy from songs, attributes, artists, genre where songs.song_num = attributes.song_num and attributes.genre_num = genre.genre_num and genre.artist_name = artists.artist_name";
-		double v,d,e;
-
-		System.out.println("Enter Valence(between 0 and 1): ");
-		v = in.nextDouble();
-		cMood += val(v);
-
-
-		System.out.println("Enter danceability(between 0 and 1): ");
-		d = in.nextDouble();
-		cMood += dance(d);
-
-		System.out.print("Enter Energy(between 0 and 1): ");
-		e = in.nextDouble();
-		cMood += energy(e);
-		System.out.print(cMood);
-
+		final private String baseQuery = "select track_name, "
+				+ "artists.artist_name, "
+				+ "songs.genre_num,song_genre, "
+				+ "valence, danceability, energy "
+				+ "from songs, attributes, artists, genre "
+				+ "where songs.song_num = attributes.song_num "
+				+ "and attributes.genre_num = genre.genre_num "
+				+ "and genre.artist_name = artists.artist_name";;
+		private String customMoodQuery;
+//		private String valence;
+//		private String energy;
+//		private String danceability;
+		
+//	public static void main(String [] args) {
+//		Scanner in = new Scanner(System.in);
+//		String cMood = "select track_name, artists.artist_name, songs.genre_num,song_genre, valence, danceability, energy from songs, attributes, artists, genre where songs.song_num = attributes.song_num and attributes.genre_num = genre.genre_num and genre.artist_name = artists.artist_name";
+//		double v,d,e;
+//
+//		System.out.println("Enter Valence(between 0 and 1): ");
+//		v = in.nextDouble();
+//		cMood += valenceQuery(v);
+//
+//
+//		System.out.println("Enter danceability(between 0 and 1): ");
+//		d = in.nextDouble();
+//		cMood += setDanceability(d);
+//
+//		System.out.print("Enter Energy(between 0 and 1): ");
+//		e = in.nextDouble();
+//		cMood += setEnergy(e);
+//		System.out.print(cMood);
+//
+//	}
+	
+	public CustomMood(){
+		customMoodQuery = baseQuery;
 	}
-	public static String val(double v) {
+	public String getCustomMoodQuery() {
+		return customMoodQuery;
+	}
+	
+	public void setValence(double value) {
+		customMoodQuery += valenceQuery(value);
+	}
+	public void setEnergy(double value) {
+		customMoodQuery += energyQuery(value);
+	}
+	public void setDanceability(double value) {
+		customMoodQuery += danceabilityQuery(value);
+	}
+	private String valenceQuery(double value) {
 		double custom1 = 0;
 		double custom2 = 0;
 		String result="";
 		while(true) {
-			if(v > 0 && v <= .25) {
+			if(value > 0 && value <= .25) {
 				custom1 += 0;
 				custom2 += .25;
 				result += " and valence > " + custom1 + " and valence <= " + custom2;
 				break;
 			}
 
-			else if ( v > .25 && v <= .5) {
+			else if ( value > .25 && value <= .5) {
 				custom1 += .25;
 				custom2 += .5;
 				result += " and valence > " + custom1 + " and valence <= " + custom2;
 				break;
 			}
 
-			else if ( v > .5 && v <= .75) {
+			else if ( value > .5 && value <= .75) {
 				custom1 += .5;
 				custom2 += .75;
 				result += " and valence > " + custom1 + " and valence <= " + custom2;
 				break;
 			}
-			else if ( v > .75 && v <= 1) {
+			else if ( value > .75 && value <= 1) {
 				custom1 += .75;
 				custom2 += 1;
 				result += " and valence > " + custom1 + " and valence <= " + custom2;
@@ -59,14 +89,14 @@ public class CustomMood {
 				System.out.println("Error must be between 0 and 1");
 				System.out.println("Enter Valence(between 0 and 1): ");
 				Scanner in= new Scanner(System.in);
-				v = in.nextDouble();
+				value = in.nextDouble();
 				continue;
 			}
 		}
 		return result;
 	}
 
-	public static String dance(double d) {
+	private String danceabilityQuery(double d) {
 		double custom3 = 0;
 		double custom4 = 0;
 		String result = "";
@@ -109,7 +139,7 @@ public class CustomMood {
 		return result;
 	}
 
-	public static String energy(double e) {
+	private String energyQuery(double e) {
 		double custom5 = 0;
 		double custom6 = 0;
 		String result = "";

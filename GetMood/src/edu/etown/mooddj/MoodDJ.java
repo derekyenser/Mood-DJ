@@ -20,6 +20,8 @@ public class MoodDJ extends Application {
 		//loadInitialScreen("view/MoodSelectionPage.fxml",primaryStage);
 		//loadInitialScreen("view/LandingPage.fxml",primaryStage);
 		loadInitialScreen("view/CustomMoodPage.fxml",primaryStage);
+		//CustomMood test = new CustomMood();
+		//System.out.println(test.getBaseQuery());
 
 	}
 

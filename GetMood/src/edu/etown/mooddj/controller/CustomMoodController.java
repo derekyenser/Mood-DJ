@@ -5,6 +5,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
+import edu.etown.mooddj.CustomMood;
 import edu.etown.mooddj.MoodDJ;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -55,7 +56,15 @@ public class CustomMoodController implements Initializable{
 		MoodDJ.loadPage("view/MoodSelectionPage.fxml", event);
 	}
 	public void createCustomMood() {
+		double valence = valenceSlider.getValue();
+		double energy = energySlider.getValue();
+		double danceability = danceabilitySlider.getValue();
+		CustomMood customMood = new CustomMood();
+		customMood.setValence(valence);
+		customMood.setEnergy(energy);
+		customMood.setDanceability(danceability);
 		
+		System.out.println(customMood.getCustomMoodQuery());
 	}
 	public void loadPlaylistPage(ActionEvent event) {
 		MoodDJ.loadPage("view/PlaylistPage.fxml",event);
