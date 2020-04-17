@@ -55,6 +55,7 @@ public class CustomMoodController implements Initializable{
 	public void loadMoodSelectionPage(ActionEvent event) {
 		MoodDJ.loadPage("view/MoodSelectionPage.fxml", event);
 	}
+	
 	public void createCustomMood() {
 		double valence = valenceSlider.getValue();
 		double energy = energySlider.getValue();
@@ -63,9 +64,11 @@ public class CustomMoodController implements Initializable{
 		customMood.setValence(valence);
 		customMood.setEnergy(energy);
 		customMood.setDanceability(danceability);
+		customMood.endQuery();
 		
 		System.out.println(customMood.getCustomMoodQuery());
 	}
+	
 	public void loadPlaylistPage(ActionEvent event) {
 		MoodDJ.loadPage("view/PlaylistPage.fxml",event);
 	}
