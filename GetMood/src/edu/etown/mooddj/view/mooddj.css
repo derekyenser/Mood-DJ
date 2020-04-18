@@ -100,18 +100,18 @@
  * Checkbox                                                                    *
  *                                                                             *
  ******************************************************************************/
-.check-box .box {    
-	-fx-background-color: transparent; 
+.check-box .box {
+	-fx-background-color: transparent;
 	-fx-border-color: #2e3131;
 	-fx-border-width: 2;
-	-fx-padding: 2;    
+	-fx-padding: 2;
 }
 
 .check-box .mark {
     	-fx-background-color: transparent;
     	-fx-background-insets: 0;
-    	-fx-padding: 4;   
-    	-fx-shape: "M0,4H2L3,6L6,0H8L4,8H2Z";    
+    	-fx-padding: 4;
+    	-fx-shape: "M0,4H2L3,6L6,0H8L4,8H2Z";
 }
 .check-box:indeterminate .mark {
     	-fx-background-color: -fx-mark-color;
@@ -120,7 +120,7 @@
 }
 .check-box:selected .mark {
     	//-fx-background-color: -fx-mark-color;
-	-fx-background-color: #2e3131;    
+	-fx-background-color: #2e3131;
 }
 /*******************************************************************************
  *                                                                             *
@@ -135,7 +135,7 @@
 }
 .slider .track {
     	-fx-background-color: transparent,rgb(76,81,86),rgb(191,195,199);
-    	-fx-background-insets: 0,1,2;    
+    	-fx-background-insets: 0,1,2;
     	-fx-background-radius: 5;
     	-fx-padding: 3.5;
 }
@@ -147,5 +147,3 @@
 .text{
 	-fx-text-fill: white;
 }
-
-
