@@ -1,5 +1,8 @@
 package edu.etown.mooddj.controller;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -64,9 +67,23 @@ public class CustomMoodController implements Initializable{
 		customMood.setValence(valence);
 		customMood.setEnergy(energy);
 		customMood.setDanceability(danceability);
-		customMood.endQuery();
+		
+		try {
+			Statement customMoodStatement = MoodDJ.conn.createStatement();
+			ResultSet rset  = customMoodStatement.executeQuery(customMood.getCustomMoodQuery());
+			while(rset.next()) {
+				String trackName = rset.getString("track_name");
+				String artistName = rset.getString("artists.artist_name");
+				System.out.println(String.format("%-45s %-45s",trackName,artistName));
+			}
+			System.out.println();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//customMood.endQuery();
 
-		System.out.println(customMood.getCustomMoodQuery());
+		//System.out.println(customMood.getCustomMoodQuery());
 	}
 
 	public void loadPlaylistPage(ActionEvent event) {

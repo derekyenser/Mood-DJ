@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 public class MoodDJ extends Application {
 
 	private Stage primaryStage;
-
+	public static Connection conn = null;
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -86,7 +86,7 @@ public class MoodDJ extends Application {
 		String user = "root";
 		String password = "246501@lP";
 		String databaseURL = "jdbc:mysql://localhost:3306/mooddj";
-		Connection conn = null;
+		
 		try {
 			conn = DriverManager.getConnection(databaseURL,user,password);
 			if (conn!=null) {
@@ -106,18 +106,7 @@ public class MoodDJ extends Application {
 //				}
 //			}
 //		}
-		try {
-			Statement statement = conn.createStatement();
-			ResultSet rset = statement.executeQuery("select * from artists");
-			while (rset.next()) {
-				String artist = rset.getString("artist_name");
-				System.out.println(artist);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		Application.launch(args);
 	}
