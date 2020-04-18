@@ -1,6 +1,8 @@
 package edu.etown.mooddj;
 
 import java.io.IOException;
+import java.sql.*;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +83,42 @@ public class MoodDJ extends Application {
 	}
 
 	public static void main(String[] args) {
+		String user = "root";
+		String password = "246501@lP";
+		String databaseURL = "jdbc:mysql://localhost:3306/mooddj";
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(databaseURL,user,password);
+			if (conn!=null) {
+				System.out.println("Connected to the database");
+			}
+			
+		} catch (SQLException ex) {
+			System.out.println("An error occurred");
+			ex.printStackTrace();
+		}
+//		} finally {
+//			if(conn != null) {
+//				try {
+//					conn.close();
+//				} catch(SQLException ex) {
+//					ex.printStackTrace();
+//				}
+//			}
+//		}
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet rset = statement.executeQuery("select * from artists");
+			while (rset.next()) {
+				String artist = rset.getString("artist_name");
+				System.out.println(artist);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Application.launch(args);
 	}
 }
