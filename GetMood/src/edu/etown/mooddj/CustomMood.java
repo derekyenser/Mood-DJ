@@ -4,14 +4,12 @@ package edu.etown.mooddj;
 import java.util.Scanner;
 
 public class CustomMood {
-		final private String baseQuery = "select track_name, "
+		final private String baseQuery = "select distinct track_name, "
 				+ "artists.artist_name, "
-				+ "songs.genre_num,song_genre, "
-				+ "valence, danceability, energy "
-				+ "from songs, attributes, artists, genre "
-				+ "where songs.song_num = attributes.song_num "
-				+ "and attributes.genre_num = genre.genre_num "
-				+ "and genre.artist_name = artists.artist_name";;
+				+ "from Songs, attributes, artists, Genre "
+				+ "where Songs.song_num = attributes.song_num "
+				+ "and attributes.genre_num = Genre.genre_num "
+				+ "and Genre.artist_name = artists.artist_name";;
 		private String customMoodQuery;
 //		private String valence;
 //		private String energy;
