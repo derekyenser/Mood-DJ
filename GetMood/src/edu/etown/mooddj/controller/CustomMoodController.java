@@ -33,7 +33,7 @@ public class CustomMoodController implements Initializable{
 	private TextField energyTextField;
 	@FXML
 	private TextField danceabilityTextField;
-	
+
 
 	public void setValenceSliderValue(ActionEvent event) {
 		setSliderValue(valenceTextField,valenceSlider);
@@ -51,11 +51,11 @@ public class CustomMoodController implements Initializable{
 		double value = Double.valueOf(string);
 		slider.setValue(value);
 	}
-	
+
 	public void loadMoodSelectionPage(ActionEvent event) {
 		MoodDJ.loadPage("view/MoodSelectionPage.fxml", event);
 	}
-	
+
 	public void createCustomMood() {
 		double valence = valenceSlider.getValue();
 		double energy = energySlider.getValue();
@@ -65,23 +65,23 @@ public class CustomMoodController implements Initializable{
 		customMood.setEnergy(energy);
 		customMood.setDanceability(danceability);
 		customMood.endQuery();
-		
+
 		System.out.println(customMood.getCustomMoodQuery());
 	}
-	
+
 	public void loadPlaylistPage(ActionEvent event) {
 		MoodDJ.loadPage("view/PlaylistPage.fxml",event);
 	}
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		sliderListener(valenceSlider,valenceTextField);
 		sliderListener(energySlider,energyTextField);
 		sliderListener(danceabilitySlider,danceabilityTextField);
-		
+
 	}
-	
+
 	public void sliderListener(Slider slider, TextField textField) {
 		DecimalFormat df = new DecimalFormat("#.##");
 		slider.valueProperty().addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
@@ -94,7 +94,7 @@ public class CustomMoodController implements Initializable{
 				String valenceString = Double.toString(valenceValue);
 				valenceString = df.format(valenceValue);
 				textField.setText(valenceString);
-				
+
 			}
 		});
 	}

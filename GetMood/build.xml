@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="GetMood">
+    <property environment="env"/>
+    <property name="Grace lab 10.location" value="../../../eclipse-workspace/Grace lab 10"/>
+    <property name="ECLIPSE_HOME" value="../../../eclipse/committers-photon/eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="JavaFX.userclasspath"/>
+    <path id="GetMood.classpath">
+        <path refid="JavaFX.userclasspath"/>
+        <pathelement location="bin"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.xtend"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="GetMood.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
+        <ant antfile="build.xml" dir="${Grace lab 10.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Grace lab 10.location}" inheritAll="false" target="build">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+    </target>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="Basics (1)">
+        <java classname="edu.etown.mooddj.MoodDJ" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+    <target name="Basics (2)">
+        <java classname="edu.etown.mooddj.Model" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+    <target name="Basics (3)">
+        <java classname="edu.etown.mooddj" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+    <target name="Basics (4)">
+        <java classname="edu.etown.mooddj.controller.Basics" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+    <target name="Basics">
+        <java classname="edu.etown.mooddj.MoodDJ" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+    <target name="CustomMood">
+        <java classname="CustomMood" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+    <target name="MoodDJ (1)">
+        <java classname="edu.etown.mooddj.MoodDJ" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+    <target name="MoodDJ">
+        <java classname="MoodDJ" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+    <target name="runPyTest">
+        <java classname="runPyTest" failonerror="true" fork="yes">
+            <classpath refid="GetMood.classpath"/>
+        </java>
+    </target>
+</project>
