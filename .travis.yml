@@ -6,4 +6,4 @@ jdk: oraclejdk9
 
 
 script:
-  - ./gradlew
+  - ./gradlew.bat
