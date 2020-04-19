@@ -86,13 +86,6 @@ public class CustomMood {
 				break;
 			}
 
-			else {
-				System.out.println("Error must be between 0 and 1");
-				System.out.println("Enter Energy(between 0 and 1): ");
-				Scanner in = new Scanner(System.in);
-				value = in .nextDouble();
-				continue;
-			}
 		}
 		return result;
 	}
