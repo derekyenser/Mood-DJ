@@ -5,3 +5,5 @@ dist: xenial
 jdk: oraclejdk9
 
 
+script:
+  - ./gradle
