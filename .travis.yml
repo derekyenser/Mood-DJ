@@ -4,5 +4,4 @@ os: linux
 dist: xenial
 jdk: oraclejdk9
 
-script:
-  - ant build
+
