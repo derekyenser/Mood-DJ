@@ -1,29 +1,20 @@
 package edu.etown.mooddj.controller;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import edu.etown.mooddj.CustomMood;
-import edu.etown.mooddj.MoodDJ;
+import edu.etown.mooddj.*;
 import edu.etown.mooddj.dao.DBSongDAO;
 import edu.etown.mooddj.model.Song;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.value.*;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class CustomMoodController implements Initializable{
@@ -62,7 +53,7 @@ public class CustomMoodController implements Initializable{
 		MoodDJ.loadPage("view/MoodSelectionPage.fxml", event);
 	}
 
-	public void createCustomMood() {
+	public void createCustomMood(ActionEvent event) {
 		double valence = valenceSlider.getValue();
 		double energy = energySlider.getValue();
 		double danceability = danceabilitySlider.getValue();
@@ -79,11 +70,28 @@ public class CustomMoodController implements Initializable{
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(query);
+		loadPlaylistPageAndSendPlaylist(event,playlist);
 		
 	}
 
-	public void loadPlaylistPage(ActionEvent event) {
-		MoodDJ.loadPage("view/PlaylistPage.fxml",event);
+	public void loadPlaylistPageAndSendPlaylist(ActionEvent event, ArrayList<Song> list) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MoodDJ.class.getResource("view/PlaylistPage.fxml"));
+			Parent root = loader.load();
+			
+			PlaylistPageController playlistPgCtrl = loader.getController();
+			playlistPgCtrl.transferPlaylist(list);
+			
+			Scene scene = new Scene(root);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setResizable(true);
+			window.setScene(scene);
+			window.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

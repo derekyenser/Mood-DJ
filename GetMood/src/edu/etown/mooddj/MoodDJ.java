@@ -104,27 +104,6 @@ public class MoodDJ extends Application {
 		database = new DBSongDAO();
 		database.establishConnection(databaseURL,user,password);
 		
-//		try {
-//			conn = DriverManager.getConnection(databaseURL,user,password);
-//			if (conn!=null) {
-//				System.out.println("Connected to the database");
-//			}
-//			
-//		} catch (SQLException ex) {
-//			System.out.println("An error occurred");
-//			ex.printStackTrace();
-//		}
-//		} finally {
-//			if(conn != null) {
-//				try {
-//					conn.close();
-//				} catch(SQLException ex) {
-//					ex.printStackTrace();
-//				}
-//			}
-//		}
-
-		
 		Application.launch(args);
 	}
 }

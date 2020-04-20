@@ -51,7 +51,7 @@ public class MoodSelectionController implements Initializable{
 	}
 
 	public void getHappyPlaylist(ActionEvent event) {
-		String happyConditions = "and energy > '.9' "
+		String happyConditions = " and energy > '.9' "
 				+ "and valence > '.9' "
 				+ "and danceability > '.9'";
 		DBSongDAO database = MoodDJ.getDatabase();
@@ -62,10 +62,10 @@ public class MoodSelectionController implements Initializable{
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
-
+		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
 	public void getSadPlaylist(ActionEvent event) {
-		String energyConditions = "and energy < '.1'"
+		String energyConditions = " and energy < '.1'"
 				+ "and valence < '.1'"
 				+ "and danceability < '.1'";
 		DBSongDAO database = MoodDJ.getDatabase();
@@ -76,10 +76,11 @@ public class MoodSelectionController implements Initializable{
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
+		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
 	
 	public void getDancePlaylist(ActionEvent event) {
-		String energyConditions = "and danceability > '.9'"
+		String energyConditions = " and danceability > '.9'"
 								 +"and valence > '.9'";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
@@ -89,10 +90,11 @@ public class MoodSelectionController implements Initializable{
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
+		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
 	
 	public void getHighEnergyPlaylist(ActionEvent event) {
-		String energyConditions = "and energy = '.9'";
+		String energyConditions = " and energy = '.9'";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
@@ -101,6 +103,27 @@ public class MoodSelectionController implements Initializable{
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
+		loadPlaylistPageAndSendPlaylist(event,playlist);
+	}
+	
+	public void loadPlaylistPageAndSendPlaylist(ActionEvent event, ArrayList<Song> list) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MoodDJ.class.getResource("view/PlaylistPage.fxml"));
+			Parent root = loader.load();
+			
+			PlaylistPageController playlistPgCtrl = loader.getController();
+			playlistPgCtrl.transferPlaylist(list);
+			
+			Scene scene = new Scene(root);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setResizable(true);
+			window.setScene(scene);
+			window.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

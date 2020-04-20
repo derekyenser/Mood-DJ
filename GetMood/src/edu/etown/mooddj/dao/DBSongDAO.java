@@ -9,12 +9,12 @@ public class DBSongDAO {
 	private Connection conn;
 	private String loadQuery;
 	public DBSongDAO() {
-		loadQuery = "select track_name, artists.artist_name, "
-				+ "Songs.genre_num,song_genre, energy, danceability, valence "
+		loadQuery = "select distinct track_name, "
+				+ "artists.artist_name "
 				+ "from Songs, attributes, artists, Genre "
 				+ "where Songs.song_num = attributes.song_num "
 				+ "and attributes.genre_num = Genre.genre_num "
-				+ "and Genre.artist_name = artists.artist_name ";
+				+ "and Genre.artist_name = artists.artist_name";
 	}
 	public void establishConnection(String url, String user,String pw) {
 		try {
@@ -37,13 +37,9 @@ public class DBSongDAO {
 			while(result.next()) {
 				Song song = new Song();
 				song.setTrackName(result.getString("track_name"));
-				song.getArtist().setArtistName(result.getString("artist_name"));
-				String trackName = song.getTrackName();
-				String artistName = song.getArtist().getArtistName();
-				System.out.println(String.format("%-100s %-45s",trackName,artistName));
+				song.setArtistName(result.getString("artist_name"));;
 				playlist.add(song);
 			}
-			//if(!result.next()) return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

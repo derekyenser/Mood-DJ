@@ -1,18 +1,24 @@
 package edu.etown.mooddj.model;
 
+import javafx.beans.property.*;
+
 public class Song {
 	private int songNum;
 	private String trackID;
-	private String trackName;
+	private SimpleStringProperty trackName;
 	private Artist artist;
+	private SimpleStringProperty artistName;
 	
 	
 	public Song(){
-		artist = new Artist();
+		this(null,null);
 	}
-//	public Song(String trackName) {
-//		
-//	}
+	public Song(String trackName,String artistName) {
+		this.trackName = new SimpleStringProperty(trackName);
+		artist = new Artist();
+		artist.setArtistName(artistName);
+		this.artistName = new SimpleStringProperty(artistName);
+	}
 	
 	public int getSongNum() {
 		return songNum;
@@ -31,17 +37,25 @@ public class Song {
 	}
 
 	public String getTrackName() {
-		return trackName;
+		return trackName.get();
 	}
 
 	public void setTrackName(String trackName) {
-		this.trackName = trackName;
+		this.trackName.set(trackName);
 	}
 	public Artist getArtist() {
 		return artist;
 	}
 	public void setArtist(Artist artist) {
 		this.artist = artist;
+	}
+
+	public String getArtistName() {
+		return artistName.get();
+	}
+
+	public void setArtistName(String artistName) {
+		this.artistName.set(artistName);
 	}
 	
 }
