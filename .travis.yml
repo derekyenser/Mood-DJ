@@ -4,4 +4,5 @@ os: linux
 dist: xenial
 jdk: oraclejdk9
 
-
+script:
+  - ./gradlew build
