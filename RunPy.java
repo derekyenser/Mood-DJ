@@ -48,8 +48,7 @@ public class RunPy {
 		pipe("Done");
 	}
 	
-	public void getUsername(username) {
-		String username;
+	public void getUsername(String username) {
 		pipe(username);
 	}
 	
