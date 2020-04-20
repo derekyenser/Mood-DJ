@@ -1,4 +1,3 @@
-package runpy;
 import java.io.*;
 import java.util.*;
 
@@ -8,6 +7,7 @@ public class RunPy {
 	public static BufferedWriter out;
 	public static String cmd;
 	public static Process p;
+	public static String username;
 
 	public RunPy(String path) {
 		cmd = path;
@@ -48,12 +48,14 @@ public class RunPy {
 		pipe("Done");
 	}
 	
-	public void getUsername(String username) {
-		pipe(username);
+	public void getUsername(String usrname) {
+		username = usrname;
 	}
 	
 	public void run() {
 		pipe("Never");
+		pipe(username);
+		pipe("Done2");
 		String s;
 		try {
 
