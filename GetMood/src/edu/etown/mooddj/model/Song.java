@@ -4,11 +4,15 @@ public class Song {
 	private int songNum;
 	private String trackID;
 	private String trackName;
+	private Artist artist;
 	
 	
-	Song(){
-		
+	public Song(){
+		artist = new Artist();
 	}
+//	public Song(String trackName) {
+//		
+//	}
 	
 	public int getSongNum() {
 		return songNum;
@@ -33,7 +37,11 @@ public class Song {
 	public void setTrackName(String trackName) {
 		this.trackName = trackName;
 	}
-	
-	
+	public Artist getArtist() {
+		return artist;
+	}
+	public void setArtist(Artist artist) {
+		this.artist = artist;
+	}
 	
 }
