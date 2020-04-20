@@ -3,6 +3,8 @@ language: java
 os: linux
 dist: xenial
 jdk: oraclejdk9
+before_install:
+  - chmod +x build.sh
 
 script:
   - ./gradlew build
