@@ -1,3 +1,4 @@
+package runpy;
 import java.io.*;
 import java.util.*;
 
@@ -45,6 +46,10 @@ public class RunPy {
 		pipe(in.nextLine());
 		
 		pipe("Done");
+	}
+	
+	public void getUsername(String username) {
+		pipe(username);
 	}
 	
 	public void run() {
