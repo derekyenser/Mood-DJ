@@ -13,7 +13,7 @@ Our Objective is to create a software to create custom playlist for a user. Thes
   5. Uses predetermined mood options
 
   **How to clone Mood DJ**
-  1. veiw the README.txt in ScriptsForSql to connect to the database.
+  1. veiw the README.txt in ScriptsForSql to connect to the database server
   2. Download the PythonExeLink.txt and run(master branch upzip the file into the get mood folder)
   3. Download and install javaFX(https://openjfx.io/)
   4. Download the get mood folder(master branch)
