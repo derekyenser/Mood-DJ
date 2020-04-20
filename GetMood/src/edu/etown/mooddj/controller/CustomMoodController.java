@@ -1,12 +1,18 @@
 package edu.etown.mooddj.controller;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import edu.etown.mooddj.CustomMood;
 import edu.etown.mooddj.MoodDJ;
+import edu.etown.mooddj.dao.DBSongDAO;
+import edu.etown.mooddj.model.Song;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -64,9 +70,16 @@ public class CustomMoodController implements Initializable{
 		customMood.setValence(valence);
 		customMood.setEnergy(energy);
 		customMood.setDanceability(danceability);
-		customMood.endQuery();
+		
+		DBSongDAO database = MoodDJ.getDatabase();
+		String loadQuery = database.getLoadQuery();
 
-		System.out.println(customMood.getCustomMoodQuery());
+		String query = customMood.getCustomMoodQuery();
+		loadQuery = database.getLoadQuery();
+		System.out.println(loadQuery);
+		ArrayList<Song> playlist =  new ArrayList<Song>();
+		playlist = database.loadSongs(query);
+		
 	}
 
 	public void loadPlaylistPage(ActionEvent event) {

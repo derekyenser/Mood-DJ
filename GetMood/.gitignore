@@ -1,3 +1,5 @@
 /.gradle/
 /bin/
+
 **/PythonScript/
+**/mysql-connector-java-8.0.19/

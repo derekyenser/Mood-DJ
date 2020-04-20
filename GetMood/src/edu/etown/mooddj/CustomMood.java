@@ -14,32 +14,32 @@ public class CustomMood {
 //		private String valence;
 //		private String energy;
 //		private String danceability;
-		
-	
+
+
 	public CustomMood(){
 		customMoodQuery = baseQuery;
 	}
-	
+
 	public String getCustomMoodQuery() {
 		return customMoodQuery;
 	}
-	
+
 	public void setValence(double value) {
 		customMoodQuery += valenceQuery(value);
 	}
-	
+
 	public void setEnergy(double value) {
 		customMoodQuery += energyQuery(value);
 	}
-	
+
 	public void setDanceability(double value) {
 		customMoodQuery += danceabilityQuery(value);
 	}
-	
+
 	public void endQuery() {
 		customMoodQuery += ";";
 	}
-	
+
 	private String valenceQuery(double value) {
 		return attributeQuery(value,"valence");
 	}

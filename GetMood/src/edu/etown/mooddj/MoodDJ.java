@@ -1,6 +1,9 @@
 package edu.etown.mooddj;
 
 import java.io.IOException;
+import java.sql.*;
+
+import edu.etown.mooddj.dao.DBSongDAO;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +16,8 @@ import javafx.scene.layout.GridPane;
 public class MoodDJ extends Application {
 
 	private Stage primaryStage;
-
+	public static Connection conn = null;
+	private static DBSongDAO database;
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -79,8 +83,48 @@ public class MoodDJ extends Application {
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
+	
+	public static DBSongDAO getDatabase() {
+		return database;
+	}
 
 	public static void main(String[] args) {
+//		String user = "root";
+//		String password = "246501@lP";
+//		String databaseURL = "jdbc:mysql://localhost:3306/mooddj";
+		
+//		RunPy script = new RunPy("PythonScript\\dist\\pullSavedSongs.exe");
+//		script.getDBCreds(); // Optional, if you have a DB set up on your computer you will want to use this
+//		script.run();
+		
+		String user = "sql9334219";
+		String password = "FrqdgTsjLk";
+		String databaseURL = "jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9334219";
+		
+		database = new DBSongDAO();
+		database.establishConnection(databaseURL,user,password);
+		
+//		try {
+//			conn = DriverManager.getConnection(databaseURL,user,password);
+//			if (conn!=null) {
+//				System.out.println("Connected to the database");
+//			}
+//			
+//		} catch (SQLException ex) {
+//			System.out.println("An error occurred");
+//			ex.printStackTrace();
+//		}
+//		} finally {
+//			if(conn != null) {
+//				try {
+//					conn.close();
+//				} catch(SQLException ex) {
+//					ex.printStackTrace();
+//				}
+//			}
+//		}
+
+		
 		Application.launch(args);
 	}
 }

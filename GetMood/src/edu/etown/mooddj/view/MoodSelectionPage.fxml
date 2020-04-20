@@ -26,10 +26,10 @@
             <Separator prefWidth="200.0" />
             <FlowPane alignment="CENTER" hgap="5.0" prefHeight="190.0" prefWidth="190.0" vgap="5.0">
                <children>
-                  <Button mnemonicParsing="false" styleClass="button-mood" text="Happy" />
-                  <Button mnemonicParsing="false" styleClass="button-mood" text="Sad" />
-                  <Button mnemonicParsing="false" styleClass="button-mood" text="Dance" />
-                  <Button mnemonicParsing="false" styleClass="button-mood" text="High Energy" />
+                  <Button fx:id="happyBtn" mnemonicParsing="false" onAction="#getHappyPlaylist" styleClass="button-mood" text="Happy" />
+                  <Button fx:id="sadBtn" mnemonicParsing="false" onAction="#getSadPlaylist" styleClass="button-mood" text="Sad" />
+                  <Button fx:id="danceBtn" mnemonicParsing="false" onAction="#getDancePlaylist" styleClass="button-mood" text="Dance" />
+                  <Button fx:id="highEnergyBtn" mnemonicParsing="false" onAction="#getHighEnergyPlaylist" styleClass="button-mood" text="High Energy" />
                   <Button fx:id="customMoodBtn" mnemonicParsing="false" onAction="#loadCustomMoodPage" styleClass="button-mood" text="Custom Mood" />
                </children>
             </FlowPane>
