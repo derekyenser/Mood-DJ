@@ -48,8 +48,18 @@ public class RunPy {
 		pipe("Done");
 	}
 	
-	public void getUsername(String usrname) {
-		username = usrname;
+	public void getUsername(String email) { // Parses the email to get the spotify username
+		String temp = "";
+		int index = 0;
+		char c = email.charAt(index);
+		while(c != '@') {
+			temp += c;
+			c = email.charAt(++index);
+		}
+		
+		System.out.println(temp);
+		
+		username = temp;
 	}
 	
 	public void run() {
