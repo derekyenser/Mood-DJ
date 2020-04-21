@@ -57,22 +57,21 @@ public class MoodSelectionController implements Initializable{
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
-		database.addCondition(happyConditions);
-		loadQuery = database.getLoadQuery();
+		loadQuery = database.addCondition(happyConditions);
+		//loadQuery = database.getLoadQuery();
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
 		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
 	public void getSadPlaylist(ActionEvent event) {
-		String energyConditions = " and energy < '.1'"
+		String sadConditions = " and energy < '.1'"
 				+ "and valence < '.1'"
 				+ "and danceability < '.1'";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
-		database.addCondition(energyConditions);
-		loadQuery = database.getLoadQuery();
+		loadQuery = database.addCondition(sadConditions); 
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
@@ -80,12 +79,12 @@ public class MoodSelectionController implements Initializable{
 	}
 	
 	public void getDancePlaylist(ActionEvent event) {
-		String energyConditions = " and danceability > '.9'"
+		String danceConditions = " and danceability > '.9'"
 								 +"and valence > '.9'";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
-		database.addCondition(energyConditions);
+		database.addCondition(danceConditions);
 		loadQuery = database.getLoadQuery();
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();

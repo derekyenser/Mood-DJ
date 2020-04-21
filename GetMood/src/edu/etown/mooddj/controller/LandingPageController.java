@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.etown.mooddj.MoodDJ;
+import edu.etown.mooddj.RunPy;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
@@ -19,10 +20,17 @@ public class LandingPageController implements Initializable{
 	private Button SignUpBtn;
 	
 	public void showSignInPage(ActionEvent event) {
-		MoodDJ.loadPage("view/SignInPage.fxml", event);
+		//MoodDJ.loadPage("view/SignInPage.fxml", event);
+		RunPy script = new RunPy("PythonScript\\dist\\pullSavedSongs.exe");
+		script.getDBCreds("sql9334219","FrqdgTsjLk","sql9.freemysqlhosting.net","sql9334219"); // Optional, if you have a DB set up on your computer you will want to use this
+		script.run();
+		
+		loadMoodSelectionPage(event);
 		
 	}
-	
+	public void loadMoodSelectionPage(ActionEvent event) {
+		MoodDJ.loadPage("view/MoodSelectionPage.fxml", event);
+	}
 	public void showNewUserPage(ActionEvent event) {
 		MoodDJ.loadPage("view/NewUserPage.fxml", event);
 		

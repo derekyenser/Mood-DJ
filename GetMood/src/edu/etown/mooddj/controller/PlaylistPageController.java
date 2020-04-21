@@ -26,6 +26,7 @@ public class PlaylistPageController implements Initializable{
 	}
 	
 	@Override
+	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//Sets up the columns in the table
 		songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song,String>("trackName"));
@@ -36,6 +37,7 @@ public class PlaylistPageController implements Initializable{
 	 * @param list
 	 */
 	public void transferPlaylist(ArrayList<Song> list) {
+		//ObservableList<Song> = 
 		tableView.setItems(FXCollections.observableArrayList(list));
 	}
 

@@ -48,6 +48,25 @@ public class RunPy {
 		pipe("Done");
 	}
 	
+	public void getDBCreds(String user,String password,String ipaddress, String dbName) {
+		//Scanner in = new Scanner(System.in);
+		//System.out.println("Please Enter the credenntials for the database you want to use");
+		
+		//System.out.print("User (Usually root): ");
+		pipe(user);
+		
+		//System.out.print("Password used to login to the DB: ");
+		pipe(password);
+		
+		//System.out.print("Host IP address (If database is on local pc then use 127.0.0.1): ");
+		pipe(ipaddress);
+		
+		//System.out.print("Database name: ");
+		pipe(dbName);
+		
+		pipe("Done");
+	}
+	
 	public void getUsername(String username) {
 		pipe(username);
 	}

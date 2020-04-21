@@ -59,8 +59,9 @@ public class DBSongDAO {
 		
 		return song;
 	}
-	public void addCondition(String condition) {
-		loadQuery = loadQuery.concat(condition);
+	public String addCondition(String condition) {
+		String query = loadQuery.concat(condition);
+		return query;
 	}
 	public Connection getConnection() {
 		return conn;

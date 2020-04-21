@@ -21,9 +21,9 @@ public class MoodDJ extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
-		//loadInitialScreen("view/MoodSelectionPage.fxml",primaryStage);
+		loadInitialScreen("view/MoodSelectionPage.fxml",primaryStage);
 		//loadInitialScreen("view/LandingPage.fxml",primaryStage);
-		loadInitialScreen("view/CustomMoodPage.fxml",primaryStage);
+		//loadInitialScreen("view/CustomMoodPage.fxml",primaryStage);
 
 	}
 
