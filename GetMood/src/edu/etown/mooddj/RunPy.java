@@ -1,4 +1,3 @@
-package edu.etown.mooddj;
 import java.io.*;
 import java.util.*;
 
@@ -8,6 +7,7 @@ public class RunPy {
 	public static BufferedWriter out;
 	public static String cmd;
 	public static Process p;
+	public static String username;
 
 	public RunPy(String path) {
 		cmd = path;
@@ -16,7 +16,7 @@ public class RunPy {
 			out = new BufferedWriter( new OutputStreamWriter(p.getOutputStream()) );
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	private static void pipe(String msg) {
@@ -32,47 +32,40 @@ public class RunPy {
 	public void getDBCreds() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please Enter the credenntials for the database you want to use");
-		
+
 		System.out.print("User (Usually root): ");
 		pipe(in.nextLine());
-		
+
 		System.out.print("Password used to login to the DB: ");
 		pipe(in.nextLine());
-		
+
 		System.out.print("Host IP address (If database is on local pc then use 127.0.0.1): ");
 		pipe(in.nextLine());
-		
+
 		System.out.print("Database name: ");
 		pipe(in.nextLine());
-		
+
 		pipe("Done");
 	}
-	
-	public void getDBCreds(String user,String password,String ipaddress, String dbName) {
-		//Scanner in = new Scanner(System.in);
-		//System.out.println("Please Enter the credenntials for the database you want to use");
-		
-		//System.out.print("User (Usually root): ");
-		pipe(user);
-		
-		//System.out.print("Password used to login to the DB: ");
-		pipe(password);
-		
-		//System.out.print("Host IP address (If database is on local pc then use 127.0.0.1): ");
-		pipe(ipaddress);
-		
-		//System.out.print("Database name: ");
-		pipe(dbName);
-		
-		pipe("Done");
+
+	public void getUsername(String email) { // Parses the email to get the spotify username
+		String temp = "";
+		int index = 0;
+		char c = email.charAt(index);
+		while(c != '@') {
+			temp += c;
+			c = email.charAt(++index);
+		}
+
+		System.out.println(temp);
+
+		username = temp;
 	}
-	
-	public void getUsername(String username) {
-		pipe(username);
-	}
-	
+
 	public void run() {
 		pipe("Never");
+		pipe(username);
+		pipe("Done2");
 		String s;
 		try {
 

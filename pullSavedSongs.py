@@ -11,37 +11,14 @@ from os import remove
 from sys import stdout, stdin
 import spotipy
 from pandas import DataFrame
-import tkinter as tk
 import mysql.connector
 
-sp, entry1 = None, None  # Global variables for sp: Spotify Token for login and getSavedSongs  entry1: GUI box input
-root = tk.Tk() # GUI box pointer
+sp = None  # Global variables for sp: Spotify Token for login and getSavedSongs  entry1: GUI box input
+#root = tk.Tk() # GUI box pointer
+username = ""
 
-def displayWindow():  # Display the login tkinter GUI box for user login (Expected to be removed later)
-    global root, entry1
-    canvas1 = tk.Canvas(root, width = 400, height = 300,  relief = 'raised')
-    canvas1.pack()
-    label1 = tk.Label(root, text='Spotify Account Access')
-    label1.config(font=('helvetica', 14))
-    canvas1.create_window(200, 25, window=label1)
-    label2 = tk.Label(root, text='Enter your Spotify user ID:')
-    label2.config(font=('helvetica', 10))
-    canvas1.create_window(200, 100, window=label2)
-    entry1 = tk.Entry (root) 
-    canvas1.create_window(200, 140, window=entry1)
-    # Calls login function and gives it the input from the GUI once the button is pushed
-    button1 = tk.Button(root, text='OK', command=login, bg='green', fg='white', font=('helvetica', 9, 'bold'))
-    canvas1.create_window(200, 180, window=button1)
-    root.mainloop()
-
-def login():  # Get username form tkinter box
-    global root, entry1
-    name = entry1.get() # Info from GUI input
-    root.destroy()
-    authenticate(name) # Calls authenticate method giving it the username
-
-def authenticate(username):  # Request account access and handle token athentication (Had to modify Spotipy library with another GUI box)
-    global sp
+def authenticate():  # Request account access and handle token athentication (Had to modify Spotipy library with another GUI box)
+    global sp, username
     try:
         # user-library-read is the type of access we are requesting
         # client_id and client_secret come from app created in Spotify developer account
@@ -103,7 +80,7 @@ def addToDB(cnx, info): #Adds all songs, attributes, and artists to the appropri
     for index, song in frame.iterrows():
         insertArtist(song["artist"], cnx) # Put artist in the artists table
         songTuple = (song["id"], song["track"]) # Info for song table
-        insertSong(songTuple, cnx) # Put song in songs table
+        insertSong(songTuple, song["artist"], cnx) # Put song in songs table
         insertSHA(song["artist"], song["id"], cnx) # Link the artist and song in database
         # Get all attributes for the song in one place
         attributeTuple = (round(song["acousticness"], 9), round(song["danceability"], 9), song["duration_ms"],
@@ -111,6 +88,7 @@ def addToDB(cnx, info): #Adds all songs, attributes, and artists to the appropri
                     round(song["loudness"], 9), song["mode"], round(song["speechiness"], 9), round(song["tempo"], 4),
                     round(song["valence"], 9))
         insertAttributes(attributeTuple, song["id"], cnx) # Put song attributes in the tracks table
+
         # Keep track of progress
         count += 1
         if count % 50 == 0:
@@ -130,29 +108,81 @@ def insertArtist(value, cnx):  # Inserts the artist info into the artists table
         if(err[1] != 'Duplicate'):
             print("Failed to insert record into artist table {}".format(error))
 
-def insertSong(values, cnx):  # Inserts the artist info into the artists table
+def insertSong(values, artist, cnx):  # Inserts the artist info into the artists table
     try:
         exist, num = getSongNum(values[0], cnx) # Check if the song is in the database
+        gNum = getGenreNum(cnx) # Get a genre_num
         if not exist: # If song does not exist in database, insert it
+            lst = []
+            lst.append(gNum)
+            lst.append("?")
+            lst.append(artist)
+            lst = tuple(lst) # lst now has all info for the song entry in one place
+            insert_query = "INSERT INTO Genre (genre_num, song_genre, artist_name) VALUES (%s, %s, %s);" # SQL insert command
+            cursor = cnx.cursor()
+            cursor.execute(insert_query, lst) # Run the command on database
+            cnx.commit()
+            cursor.close()
+
             lst = []
             lst.append(num)
             lst.extend(values)
+            lst.append(gNum)
             lst = tuple(lst) # lst now has all info for the song entry in one place
-            insert_query = "INSERT INTO songs (song_num, track_id, track_name) VALUES (%s, %s, %s);" # SQL insert command
+            insert_query = "INSERT INTO Songs (song_num, track_id, track_name, genre_num) VALUES (%s, %s, %s, %s);" # SQL insert command
             cursor = cnx.cursor()
             cursor.execute(insert_query, lst) # Run the command on database
             cnx.commit()
             cursor.close()
         else:
-            print('Duplicate:', values[1])
+            cursor = cnx.cursor(buffered=True)
+            sql_select_query = "select genre_num from Songs where track_id =  '" + values[0] + "';" # SQL command to get a new genre_num
+            cursor.execute(sql_select_query) # Run the command
+            record = cursor.fetchall() # Get all results of the query (Should only be one)
+            check = 0
+            for row in record:
+                check = row[0]
+            if check == None:
+                lst = []
+                lst.append(gNum)
+                lst.append("?")
+                lst.append(artist)
+                lst = tuple(lst) # lst now has all info for the song entry in one place
+                insert_query = "INSERT INTO Genre (genre_num, song_genre, artist_name) VALUES (%s, %s, %s);"# SQL insert command
+                cursor = cnx.cursor()
+                cursor.execute(insert_query, lst) # Run the command on database
+                cnx.commit()
+                cursor.close()
+
+                insert_query = "UPDATE Songs SET genre_num = %s WHERE track_id = %s;" # SQL insert command
+                cursor = cnx.cursor()
+                cursor.execute(insert_query, (gNum, values[0])) # Run the command on database
+                cnx.commit()
+                cursor.close()
+            else:
+                print('Duplicate:', values[1])
+
+        insertPlaylist(cnx, num)
+
     except mysql.connector.Error as error: # If we get an error other than "Duplicate entry" print it (The same artist name is expected multiple times)
-        print("Failed to insert record into songs table {}".format(error))
+        print("Failed to insert record into Songs table {}".format(error))
+
+def getGenreNum(cnx): # Get a genre_num for the DB to use
+    try:
+        cursor = cnx.cursor(buffered=True)
+        sql_select_query = "select MAX(genre_num) from Genre;" # SQL command to get a new genre_num
+        cursor.execute(sql_select_query) # Run the command
+        record = cursor.fetchall() # Get all results of the query (Should only be one)
+        for row in record:
+            return row[0]+1
+    except mysql.connector.Error as error:
+        print("Failed to get record from MySQL Genre table: {}".format(error))
 
 def getSongNum(track, cnx):  # Returns the song_num if the song is in the databse, otherwise returns an ID number to use
     try:
         # If the song already exists, return the song_num
         cursor = cnx.cursor(buffered=True)
-        sql_select_query = "select song_num from songs where track_id = '" + track + "';" # SQL command to get the song_num for a song
+        sql_select_query = "select song_num from Songs where track_id = '" + track + "';" # SQL command to get the song_num for a song
         cursor.execute(sql_select_query) # Run the command
         record = cursor.fetchall() # Get all results of the query (Should only be one)
         for row in record:
@@ -160,13 +190,13 @@ def getSongNum(track, cnx):  # Returns the song_num if the song is in the databs
 
         # If the song does not exist, return a song_num for it
         cursor = cnx.cursor(buffered=True)
-        sql_select_query = "select MAX(song_num) from songs;" # SQL command to get a new song_num
+        sql_select_query = "select MAX(song_num) from Songs;" # SQL command to get a new song_num
         cursor.execute(sql_select_query) # Run the command
         record = cursor.fetchall() # Get all results of the query (Should only be one)
         for row in record:
             return False, row[0]+1
     except mysql.connector.Error as error:
-        print("Failed to get record from MySQL table: {}".format(error))
+        print("Failed to get record from MySQL Songs table: {}".format(error))
 
 def insertSHA(artist, track, cnx):
     exists, num = getSongNum(track, cnx)
@@ -197,19 +227,26 @@ def insertAttributes(values, track, cnx):  # Inserts the attributes into the att
             attNum = None
             for row in record:
                 attNum = row[0]+1
-        except mysql.connector.Error as error:
-            print("Failed to get record from MySQL table: {}".format(error))
 
-        try:
+            # Get the genre_num 
+            cursor = cnx.cursor(buffered=True)
+            sql_select_query = "select genre_num from Songs where track_id = '" + track + "';" # SQL command to get the genre_num for a song
+            cursor.execute(sql_select_query) # Run the command
+            record = cursor.fetchall() # Get all results of the query (Should only be one)
+            gNum = None
+            for row in record:
+                gNum = row[0]
+
             lst = []
             lst.append(attNum)
             lst.extend(values)
             lst.append(sNum)
+            lst.append(gNum)
             lst = tuple(lst)
             # SQL insert query (%s is a place holder for a value to be specified later)
             insert_query = """INSERT INTO attributes (attribute_num, accousticness, danceability, duration_ms, energy, 
                             instrumentalness, key_s, liveness, loudness, mode_A, speechiness, tempo,
-                            valence, song_num) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+                            valence, song_num, genre_num) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
             cursor = cnx.cursor()
             cursor.execute(insert_query, lst) # Run the command and fill in %s with actual values
             cnx.commit()
@@ -222,12 +259,84 @@ def insertAttributes(values, track, cnx):  # Inserts the attributes into the att
     else:
         print("Coundn't add " + str(track))
 
+def insertPlaylist(cnx, sNum): # Insert songs into the playlist table under the users id so we know which songs they like
+    global username
+    exists = False
+    try:
+        irr, userId = checkUser(cnx)
+        cursor = cnx.cursor(buffered=True)
+        sql_select_query = "select song_num from playlist where song_num = %s AND user_id = %s;" # SQL command to get the song_num for a song
+        cursor.execute(sql_select_query, (sNum, userId)) # Run the command
+        record = cursor.fetchall() # Get all results of the query (Should only be one)
+        for row in record:
+            exists = True
+
+        if not exists:
+            cursor = cnx.cursor(buffered=True)
+            sql_select_query = "select COUNT(playlist_id) from playlist;" # SQL command to get a new song_num
+            cursor.execute(sql_select_query) # Run the command
+            record = cursor.fetchall() # Get all results of the query (Should only be one)
+            pId = 0
+            for row in record:
+                pId = row[0]
+
+            insert_query = "INSERT INTO playlist VALUES (%s, 'Favorites', %s, %s);" # SQL insert command
+            cursor = cnx.cursor()
+            cursor.execute(insert_query, (pId, sNum, userId)) # Run the command on database
+            cnx.commit()
+            cursor.close()
+
+    except mysql.connector.Error as error: # If we get an error other than "Duplicate entry" print it (The same artist name is expected multiple times)
+        err = ("{}".format(error)).split()
+        if(err[1] != 'Duplicate'):
+            print("Failed to insert record into playlist table {}".format(error))
+
+def addUser(cnx): # Add a user to our database
+    global username
+    exists, userId = checkUser(cnx)
+    if not exists:
+        try:
+            insert_query = "INSERT INTO UserS (Users_id, user_name) VALUES (%s, %s);" # SQL insert command (will add password and email later)
+            cursor = cnx.cursor()
+            cursor.execute(insert_query, (userId, username)) # Run the command on database
+            cnx.commit()
+            cursor.close()
+
+        except mysql.connector.Error as error:
+            print("Failed to insert record into UserS table: {}".format(error))
+
+def checkUser(cnx): # Check if a user is already in our database. If not, generate a new Id
+    global username
+    try:
+        # If the user already exists, return the Users_id
+        cursor = cnx.cursor(buffered=True)
+        sql_select_query = "select Users_id from UserS where user_name = '" + username + "';" # SQL command to get the song_num for a song
+        cursor.execute(sql_select_query) # Run the command
+        record = cursor.fetchall() # Get all results of the query (Should only be one)
+        for row in record:
+            return True, row[0]
+
+        # If the suser does not exist, return a user_id for it
+        cursor = cnx.cursor(buffered=True)
+        sql_select_query = "select MAX(Users_id) from UserS;" # SQL command to get a new song_num
+        cursor.execute(sql_select_query) # Run the command
+        record = cursor.fetchall() # Get all results of the query (Should only be one)
+        for row in record:
+            if row[0] == None:
+                return False, 0
+            else:
+                return False, row[0]+1
+    except mysql.connector.Error as error:
+        print("Failed to get record from MySQL UserS table: {}".format(error))
+
 def main():
+    global username
     creds = []
     s = stdin.readline().strip()
     while s not in ['Done','Never']:
         creds.append(s)
         s = stdin.readline().strip()
+
     if s == 'Done': # If you used the getDBCreds method in java to use the DB on your system (recommended)
         config = {
         'user': creds[0],
@@ -239,19 +348,33 @@ def main():
     else:
         # My database credentials required for connection
         config = {
-        'user': 'root',
-        'password': '8Vnuxc3$',
-        'host': '127.0.0.1', # IP address unless database is on local machine, then 127.0.0.1
-        'database': 'class_mooddj', # database name
+        'user': 'sql9334219',
+        'password': 'FrqdgTsjLk',
+        'host': 'sql9.freemysqlhosting.net', # IP address unless database is on local machine, then 127.0.0.1
+        'database': 'sql9334219', # database name
         'raise_on_warnings': True
         }
+
+    stdout.write("CheckPoint...\n")
+    stdout.flush()
+
+    name = []
+    st = stdin.readline().strip()
+    while st not in ['Done2']:
+        name.append(st)
+        st = stdin.readline().strip()
+    username = name[0]
+    stdout.write(str(username) + '\n')
+    stdout.flush()
 
     stdout.write("Starting...\n")
     stdout.flush()
 
-    displayWindow()
+    authenticate()
+    #displayWindow()
     songInfo = getLikedSongs()
     connection = makeConection(config) # Make connection to database
+    addUser(connection)
     addToDB(connection, songInfo)
 
     connection.close()
