@@ -1,4 +1,3 @@
-package edu.etown.mooddj;
 import java.io.*;
 import java.util.*;
 
@@ -8,6 +7,7 @@ public class RunPy {
 	public static BufferedWriter out;
 	public static String cmd;
 	public static Process p;
+	public static String username;
 
 	public RunPy(String path) {
 		cmd = path;
@@ -48,12 +48,24 @@ public class RunPy {
 		pipe("Done");
 	}
 	
-	public void getUsername(String username) {
-		pipe(username);
+	public void getUsername(String email) { // Parses the email to get the spotify username
+		String temp = "";
+		int index = 0;
+		char c = email.charAt(index);
+		while(c != '@') {
+			temp += c;
+			c = email.charAt(++index);
+		}
+		
+		System.out.println(temp);
+		
+		username = temp;
 	}
 	
 	public void run() {
 		pipe("Never");
+		pipe(username);
+		pipe("Done2");
 		String s;
 		try {
 
