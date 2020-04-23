@@ -31,8 +31,8 @@ public class SignInPageController implements Initializable{
 //	}
 	
 	public void loginAndloadMoodSelection(ActionEvent event) {
-		progressIndicator.setVisible(true);
-		loadingText.setVisible(true);
+//		progressIndicator.setVisible(true);
+//		loadingText.setVisible(true);
 		RunPy script = new RunPy("PythonScript\\dist\\pullSavedSongs.exe","pyThread");
 		script.getUsername(usernameField.getText());
 	
