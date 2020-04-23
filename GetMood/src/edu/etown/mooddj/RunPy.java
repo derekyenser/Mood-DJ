@@ -1,15 +1,21 @@
+package edu.etown.mooddj;
+
 import java.io.*;
 import java.util.*;
 
-public class RunPy {
+public class RunPy implements Runnable{
 
 	public static BufferedReader inp;
 	public static BufferedWriter out;
 	public static String cmd;
 	public static Process p;
 	public static String username;
+	
+	private Thread thread;
+	private String threadName;
 
-	public RunPy(String path) {
+	public RunPy(String path,String name) {
+		threadName = name;
 		cmd = path;
 		try {
 			p = Runtime.getRuntime().exec(cmd); //Process to run the script
@@ -81,6 +87,14 @@ public class RunPy {
 
 		catch (Exception err) {
 			err.printStackTrace();
+		}
+	}
+	
+	public void start() {
+		System.out.println("Starting "+ threadName);
+		if(thread == null) {
+			thread = new Thread(this,threadName);
+			thread.start();
 		}
 	}
 

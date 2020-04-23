@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.etown.mooddj.MoodDJ;
+import edu.etown.mooddj.RunPy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,27 +21,29 @@ public class SignInPageController implements Initializable{
 	private TextField usernameField;
 	@FXML
 	private PasswordField passwordField;
+	@FXML
+	private ProgressIndicator progressIndicator;
+	@FXML
+	private Label loadingText;
 	
 //	private void authenticateLogin() {
 //		
 //	}
 	
-	private void showMoodSelectionPage() {
-//		try {
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(MoodDJ.class.getResource("view/MoodSelectionPage.fxml"));
-//			GridPane signUpPage = (GridPane) loader.load();
-//			Scene scene = new Scene(signUpPage);
-//			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//			window.setScene(scene);
-//			window.show();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+	public void loginAndloadMoodSelection(ActionEvent event) {
+		progressIndicator.setVisible(true);
+		loadingText.setVisible(true);
+		RunPy script = new RunPy("PythonScript\\dist\\pullSavedSongs.exe","pyThread");
+		script.getUsername(usernameField.getText());
+	
+		script.start();
+		loadMoodSelectionPage(event);
 	}
 	public void loadLandingPage(ActionEvent event) {
 		MoodDJ.loadPage("view/LandingPage.fxml",event);
+	}
+	public void loadMoodSelectionPage(ActionEvent event) {
+		MoodDJ.loadPage("view/MoodSelectionPage.fxml", event);
 	}
 	
 	@Override
