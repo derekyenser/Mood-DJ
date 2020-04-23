@@ -52,7 +52,7 @@ public class MoodSelectionController implements Initializable{
 
 	public void getHappyPlaylist(ActionEvent event) {
 		String happyConditions = " and energy > '.75' "
-				+ "and valence > '.75' ";
+				+ "and valence > '.75' order by energy desc, valence desc";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
@@ -64,9 +64,9 @@ public class MoodSelectionController implements Initializable{
 		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
 	public void getSadPlaylist(ActionEvent event) {
-		String sadConditions = " and energy < '.1'"
-				+ "and valence < '.1'"
-				+ "and danceability < '.1'";
+		String sadConditions = " and energy < '.25'"
+				+ "and valence < '.25'"
+				+ "and danceability < '.25' order energy asc, valence asc, danceability asc ";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
@@ -79,7 +79,7 @@ public class MoodSelectionController implements Initializable{
 	
 	public void getDancePlaylist(ActionEvent event) {
 		String danceConditions = " and danceability > '.75'"
-								 +"and valence > '.75'";
+								 +"and valence > '.75' order by danceability desc, valence desc";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
@@ -92,7 +92,7 @@ public class MoodSelectionController implements Initializable{
 	}
 	
 	public void getHighEnergyPlaylist(ActionEvent event) {
-		String energyConditions = " and energy = '.9'";
+		String energyConditions = " and energy = '.75' order by energy desc";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
