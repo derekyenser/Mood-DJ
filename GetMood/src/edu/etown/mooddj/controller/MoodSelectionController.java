@@ -51,9 +51,8 @@ public class MoodSelectionController implements Initializable{
 	}
 
 	public void getHappyPlaylist(ActionEvent event) {
-		String happyConditions = " and energy > '.9' "
-				+ "and valence > '.9' "
-				+ "and danceability > '.9'";
+		String happyConditions = " and energy > '.75' "
+				+ "and valence > '.75' ";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
@@ -79,8 +78,8 @@ public class MoodSelectionController implements Initializable{
 	}
 	
 	public void getDancePlaylist(ActionEvent event) {
-		String danceConditions = " and danceability > '.9'"
-								 +"and valence > '.9'";
+		String danceConditions = " and danceability > '.75'"
+								 +"and valence > '.75'";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
