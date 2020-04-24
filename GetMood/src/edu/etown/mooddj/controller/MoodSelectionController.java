@@ -57,7 +57,6 @@ public class MoodSelectionController implements Initializable{
 		String loadQuery = database.getLoadQuery();
 
 		loadQuery = database.addCondition(happyConditions);
-		//loadQuery = database.getLoadQuery();
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
@@ -83,8 +82,7 @@ public class MoodSelectionController implements Initializable{
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
-		database.addCondition(danceConditions);
-		loadQuery = database.getLoadQuery();
+		loadQuery =database.addCondition(danceConditions);
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);

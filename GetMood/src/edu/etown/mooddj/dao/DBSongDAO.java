@@ -18,6 +18,7 @@ public class DBSongDAO {
 	}
 	public void establishConnection(String url, String user,String pw) {
 		try {
+			System.out.println("Attempting to connect...");
 			conn = DriverManager.getConnection(url,user,pw);
 			if (conn!=null) {
 				System.out.println("Connected to the database");

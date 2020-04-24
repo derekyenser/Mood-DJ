@@ -1,3 +1,5 @@
+package edu.etown.mooddj;
+
 import java.io.*;
 import java.util.*;
 
