@@ -41,7 +41,7 @@ public class MoodSelectionController implements Initializable{
 	private Button highEnergyBtn;
 
 	/**
-	 * The method called to display the page for selecting a custom mood . 
+	 * The method called to display the page for selecting a custom mood .
 	 * Currently called by the Button customMoodButton.
 	 * @param event
 	 * @return Nothing
@@ -52,7 +52,7 @@ public class MoodSelectionController implements Initializable{
 
 	public void getHappyPlaylist(ActionEvent event) {
 		String happyConditions = " and energy > '.75' "
-				+ "and valence > '.75' ";
+				+ "and valence > '.75' order by energy desc, valence desc";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
@@ -63,22 +63,22 @@ public class MoodSelectionController implements Initializable{
 		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
 	public void getSadPlaylist(ActionEvent event) {
-		String sadConditions = " and energy < '.1'"
-				+ "and valence < '.1'"
-				+ "and danceability < '.1'";
+		String sadConditions = " and energy < '.25'"
+				+ "and valence < '.25'"
+				+ "and danceability < '.25' order by energy asc, valence asc, danceability asc ";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
-		loadQuery = database.addCondition(sadConditions); 
+		loadQuery = database.addCondition(sadConditions);
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
 		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
-	
+
 	public void getDancePlaylist(ActionEvent event) {
 		String danceConditions = " and danceability > '.75'"
-								 +"and valence > '.75'";
+								 + "and valence > '.75' order by danceability desc, valence desc";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
@@ -88,29 +88,28 @@ public class MoodSelectionController implements Initializable{
 		playlist = database.loadSongs(loadQuery);
 		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
-	
+
 	public void getHighEnergyPlaylist(ActionEvent event) {
-		String energyConditions = " and energy = '.9'";
+		String energyConditions = " and energy = '.75' order by energy desc";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
-		database.addCondition(energyConditions);
-		loadQuery = database.getLoadQuery();
+		loadQuery = database.addCondition(energyConditions);
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(loadQuery);
 		loadPlaylistPageAndSendPlaylist(event,playlist);
 	}
-	
+
 	public void loadPlaylistPageAndSendPlaylist(ActionEvent event, ArrayList<Song> list) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MoodDJ.class.getResource("view/PlaylistPage.fxml"));
 			Parent root = loader.load();
-			
+
 			PlaylistPageController playlistPgCtrl = loader.getController();
 			playlistPgCtrl.transferPlaylist(list);
-			
+
 			Scene scene = new Scene(root);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setResizable(true);
@@ -123,7 +122,7 @@ public class MoodSelectionController implements Initializable{
 	}
 
 	/**
-	 * Checks whether sizeCheckBox is selected. If sizeCheckBox is selected, 
+	 * Checks whether sizeCheckBox is selected. If sizeCheckBox is selected,
 	 * sizeTextField will be editable.
 	 * @param event
 	 * @return Nothing
