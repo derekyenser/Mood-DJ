@@ -9,7 +9,7 @@ public class CustomMood {
 				+ "from Songs, attributes, artists, Genre "
 				+ "where Songs.song_num = attributes.song_num "
 				+ "and attributes.genre_num = Genre.genre_num "
-				+ "and Genre.artist_name = artists.artist_name";;
+				+ "and Genre.artist_name = artists.artist_name";
 		private String customMoodQuery;
 //		private String valence;
 //		private String energy;

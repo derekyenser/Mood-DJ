@@ -90,7 +90,7 @@ public class MoodSelectionController implements Initializable{
 	}
 
 	public void getHighEnergyPlaylist(ActionEvent event) {
-		String energyConditions = " and energy = '.75' order by energy desc";
+		String energyConditions = " and energy > '.75' order by energy desc";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 

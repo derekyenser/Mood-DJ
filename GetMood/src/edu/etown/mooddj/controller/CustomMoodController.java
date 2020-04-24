@@ -63,11 +63,10 @@ public class CustomMoodController implements Initializable{
 		customMood.setDanceability(danceability);
 		
 		DBSongDAO database = MoodDJ.getDatabase();
-		String loadQuery = database.getLoadQuery();
 
 		String query = customMood.getCustomMoodQuery();
-		loadQuery = database.getLoadQuery();
-		System.out.println(loadQuery);
+
+		System.out.println(query);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(query);
 		loadPlaylistPageAndSendPlaylist(event,playlist);
