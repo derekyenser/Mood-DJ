@@ -52,7 +52,7 @@ public class MoodSelectionController implements Initializable{
 
 	public void getHappyPlaylist(ActionEvent event) {
 		String happyConditions = " and energy > '.75' "
-				+ "and valence > '.75' order by energy desc, valence desc";
+				+ "and valence > '.75' and mode_A = 'major' order by energy desc, valence desc";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
@@ -65,7 +65,7 @@ public class MoodSelectionController implements Initializable{
 	public void getSadPlaylist(ActionEvent event) {
 		String sadConditions = " and energy < '.25'"
 				+ "and valence < '.25'"
-				+ "and danceability < '.25' order by energy asc, valence asc, danceability asc ";
+				+ "and danceability < '.25' and mode_A = 'minor' order by energy asc, valence asc, danceability asc ";
 		DBSongDAO database = MoodDJ.getDatabase();
 		String loadQuery = database.getLoadQuery();
 
