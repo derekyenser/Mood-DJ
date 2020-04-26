@@ -9,11 +9,10 @@ public class CustomMood {
 				+ "from Songs, attributes, artists, Genre "
 				+ "where Songs.song_num = attributes.song_num "
 				+ "and attributes.genre_num = Genre.genre_num "
-				+ "and Genre.artist_name = artists.artist_name";
+				+ "and Genre.artist_name = artists.artist_name";;
 		private String customMoodQuery;
-//		private String valence;
-//		private String energy;
-//		private String danceability;
+		private String orderQuery = " ";
+		private int i = 0;
 
 
 	public CustomMood(){
@@ -33,11 +32,11 @@ public class CustomMood {
 	}
 
 	public void setDanceability(double value) {
-		customMoodQuery += danceabilityQuery(value);
+		customMoodQuery += danceabilityQuery(value) + " order by " + orderQuery;
 	}
 
 	public void endQuery() {
-		customMoodQuery += ";";
+		customMoodQuery +=";";
 	}
 
 	private String valenceQuery(double value) {
@@ -52,6 +51,7 @@ public class CustomMood {
 	private String energyQuery(double value) {
 		return attributeQuery(value,"energy");
 	}
+	
 	private String attributeQuery(double value, String attribute) {
 		double custom5 = 0;
 		double custom6 = 0;
@@ -61,27 +61,59 @@ public class CustomMood {
 				custom5 += 0;
 				custom6 += .25;
 				result += String.format(" and %s > " + custom5 + " and %s <= ", attribute, attribute) + custom6;
-				break;
+				if(i <= 1) {
+					orderQuery += attribute + " asc, " ;
+					i++;
+					break;
+				}
+				else {
+					orderQuery += attribute + " asc ";
+					break;
+				}
 			}
 
 			else if ( value > .25 && value <= .5) {
 				custom5 += .25;
 				custom6 += .5;
 				result += String.format(" and %s > " + custom5 + " and %s <= ", attribute, attribute) + custom6;
-				break;
+				if(i <= 1) {
+					orderQuery += attribute + " asc, " ;
+					i++;
+					break;
+				}
+				else {
+					orderQuery += attribute + " asc ";
+					break;
+				}
 			}
 
 			else if ( value > .5 && value <= .75) {
 				custom5 += .5;
 				custom6 += .75;
 				result += String.format(" and %s > " + custom5 + " and %s <= ", attribute, attribute) + custom6;
-				break;
+				if(i <= 1) {
+					orderQuery += attribute + " desc, " ;
+					i++;
+					break;
+				}
+				else {
+					orderQuery += attribute + " desc ";
+					break;
+				}
 			}
 			else if ( value > .75 && value <= 1) {
 				custom5 += .75;
 				custom6 += 1;
 				result += String.format(" and %s > " + custom5 + " and %s <= ", attribute, attribute) + custom6;
-				break;
+				if(i <= 1) {
+					orderQuery += attribute + " desc, " ;
+					i++;
+					break;
+				}
+				else {
+					orderQuery += attribute + " desc ";
+					break;
+				}
 			}
 
 		}
