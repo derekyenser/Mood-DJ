@@ -2,10 +2,10 @@ energy
 select distinct track_name, artists.artist_name from Songs, attributes, artists, Genre where Songs.song_num = attributes.song_num and attributes.genre_num = Genre.genre_num and Genre.artist_name = artists.artist_name and energy > '.75' order by energy desc;
 
 happy
-select distinct track_name, artists.artist_name from Songs, attributes, artists, Genre where Songs.song_num = attributes.song_num and attributes.genre_num = Genre.genre_num and Genre.artist_name = artists.artist_name and energy > '.75' and valence > '.75' order by energy desc, valence desc;
+select distinct track_name, artists.artist_name from Songs, attributes, artists, Genre where Songs.song_num = attributes.song_num and attributes.genre_num = Genre.genre_num and Genre.artist_name = artists.artist_name and energy > '.75' and valence > '.75' and mode_A = 'major' order by energy desc, valence desc;
 
 sad
-select distinct track_name, artists.artist_name from Songs, attributes, artists, Genre where Songs.song_num = attributes.song_num and attributes.genre_num = Genre.genre_num and Genre.artist_name = artists.artist_name and energy < '.25' and valence < '.25' and danceability < '.25' order by energy asc ,valence asc, danceability asc;
+select distinct track_name, artists.artist_name from Songs, attributes, artists, Genre where Songs.song_num = attributes.song_num and attributes.genre_num = Genre.genre_num and Genre.artist_name = artists.artist_name and energy < '.25' and valence < '.25' and danceability < '.25' and mode_A = 'minor' order by energy asc ,valence asc, danceability asc;
 
 dance music
 select distinct track_name, artists.artist_name from Songs, attributes, artists, Genre where Songs.song_num = attributes.song_num and attributes.genre_num = Genre.genre_num and Genre.artist_name = artists.artist_name and danceability > '.75' and valence > '.75' order by danceability desc, valence desc;
