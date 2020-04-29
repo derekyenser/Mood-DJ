@@ -30,6 +30,7 @@ public class DBSongDAO {
 			ex.printStackTrace();
 		}
 	}
+	
 	public ArrayList<Song> loadSongs(String loadQuery) {
 		ArrayList<Song> playlist = new ArrayList<Song>();
 		try {
@@ -47,6 +48,7 @@ public class DBSongDAO {
 		}
 		return playlist;
 	}
+	
 	public Song loadSong(String loadQuery) {
 		Song song = new Song();
 		try {
@@ -61,6 +63,7 @@ public class DBSongDAO {
 		
 		return song;
 	}
+	
 	public void saveUser(String username, String password) {
 		String query = "INSERT INTO UserS (user_name,User_password) VALUES (?, ?)";
 		PreparedStatement statement;
@@ -68,7 +71,10 @@ public class DBSongDAO {
 			statement = conn.prepareStatement(query);
 			statement.setString(1,username);
 			statement.setString(2,password);
-			statement.executeUpdate();
+			int rowsInserted = statement.executeUpdate();
+			if (rowsInserted > 0) {
+			    System.out.println("A new user was inserted successfully!");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -41,15 +41,15 @@
                   </Text>
                   <Label alignment="CENTER_RIGHT" text="Username: " GridPane.rowIndex="1" />
                   <Label text="Password: " GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Button mnemonicParsing="false" styleClass="button-light" text="Sign Up" />
+                        <Button mnemonicParsing="false" onAction="#signUpUser" styleClass="button-light" text="Sign Up" />
                      </children>
                   </HBox>
                   <Label text="Confirm Password: " GridPane.rowIndex="3" />
-                  <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>

@@ -30,12 +30,15 @@ public class SignUpPageController implements Initializable{
 		if(passwordMatch(password,confirmPassword)) {
 			DBSongDAO database = MoodDJ.getDatabase();
 			database.saveUser(username,password);
-			MoodDJ.loadPage("FavoriteArtistPage.fxml", event);
+			MoodDJ.loadPage("view/NewUserPreferencesPage.fxml", event);
+		} else {
+			System.out.println("Signup Unsuccessful");
 		}
+		
 	}
 	
 	public boolean passwordMatch(String pass1, String pass2) {
-		if(pass1 == pass2) {
+		if(pass1.equals(pass2)) {
 			return true;
 		}
 		else return false;
