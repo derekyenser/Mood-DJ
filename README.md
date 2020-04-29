@@ -17,3 +17,4 @@ Our Objective is to create a software to create custom playlist for a user. Thes
   2. Download the PythonExeLink.txt and run(master branch upzip the file into the get mood folder)
   3. Download and install javaFX(https://openjfx.io/) add javaFx to build path
   4. Add external jar (mysql-connector-java-8.0.19.jar) to build path
+  5. Run the class MoodDJ in the etown.edu.mooddj package
