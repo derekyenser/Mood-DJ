@@ -10,9 +10,10 @@ Our Objective is to create a software to create custom playlist for a user. Thes
   2. Contains over 230,000 songs
   3. links to spotify API
   4. creates custom playlist
-  5. Uses predetermined mood options, and custom mood options
+  5. Uses predetermined mood, and custom mood options
 
   **How to clone Mood DJ**
-  1. Download the PythonExeLink.txt and run(master branch upzip the file into the   get mood folder)
+  1. Download the PythonExeLink.txt and run(master branch upzip the file into the get mood folder)
   2. Download and install javaFX(https://openjfx.io/)
   3. Download the get mood folder(master branch)
+  4. Add external jar (mysql-connector-java-8.0.19.jar) to build path
