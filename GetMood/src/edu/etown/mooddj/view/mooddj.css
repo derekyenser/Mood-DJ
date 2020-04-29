@@ -1,6 +1,9 @@
 *{
 	//-fx-base: #2e3131;
 }
+.scene{
+	-mooddj-dodgerblue: derive(#22a7f0);
+}
 .background{
 	-fx-background-color: #2e3131;
 }
@@ -128,7 +131,10 @@
  *                                                                             *
  ******************************************************************************/
 .slider .thumb {
-    	-fx-background-color: transparent,rgb(76,81,86), linear-gradient(to bottom,rgb(200,202,207) 0%,rgb(180,182,187) 100%), linear-gradient(to bottom,rgb(222,223,228) 0%,rgb(195,199,203) 100%);
+    	/* -fx-background-color: transparent,rgb(76,81,86),
+												linear-gradient(to bottom,rgb(200,202,207) 0%,rgb(180,182,187) 100%),
+												linear-gradient(to bottom,rgb(222,223,228) 0%,rgb(195,199,203) 100%); */
+			-fx-background-color: -mooddj-dodgerblue;
     	-fx-background-insets: 0,1,2,3;
     	-fx-background-radius: 1.0em;
     	-fx-padding: 7;
@@ -147,3 +153,31 @@
 .text{
 	-fx-text-fill: white;
 }
+/*******************************************************************************
+ *                                                                             *
+ * TextField                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+
+ .text-field {
+     /* -fx-background-color: transparent,rgb(184, 187, 191),rgb(236,238,241); */
+		 -fx-background-color: rgba(255,255,255,0.7);
+		 -fx-border-color: #bfbfbf;
+		 -fx-border-width: 2;
+     -fx-background-insets: 0, 1, 2;
+     -fx-background-radius: 0;
+     -fx-padding: 3 5 3 5;
+     -fx-prompt-text-fill: derive(white,-30%);
+ }
+ .text-field:hover {
+     /* -fx-background-color: transparent,rgb(184, 187, 191),rgb(244,246,249); */
+		 -fx-background-color: rgb(255,255,255);
+     -fx-background-insets: 0, 1, 2;
+     -fx-background-radius: 0;
+ }
+ .text-field:focused {
+     /* -fx-background-color: rgb(76,81,86),rgb(184, 187, 191),rgb(244,246,249); */
+		 -fx-border-color: -mooddj-dodgerblue;
+     -fx-background-insets: -0.4, 1, 2;
+     -fx-background-radius: 0;
+ }

@@ -83,7 +83,7 @@ public class RunPy implements Runnable{
 			}
 
 			inp.close();
-			//SingInPageController.loadMoodSelectionPage()
+			//SignInPageController.loadMoodSelectionPage();
 		}
 
 		catch (Exception err) {

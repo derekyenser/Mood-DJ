@@ -9,8 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 
 
 public class MoodDJ extends Application {
@@ -98,7 +97,7 @@ public class MoodDJ extends Application {
 //		script.run();
 		
 		String user = "sql9334219";
-		String password = "psql9334219";
+		String password = "FrqdgTsjLk";
 		String databaseURL = "jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9334219";
 		
 		database = new DBSongDAO();
