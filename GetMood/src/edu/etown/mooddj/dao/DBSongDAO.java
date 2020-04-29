@@ -16,6 +16,7 @@ public class DBSongDAO {
 				+ "and attributes.genre_num = Genre.genre_num "
 				+ "and Genre.artist_name = artists.artist_name";
 	}
+	
 	public void establishConnection(String url, String user,String pw) {
 		try {
 			System.out.println("Attempting to connect...");
@@ -59,6 +60,20 @@ public class DBSongDAO {
 		}
 		
 		return song;
+	}
+	public void saveUser(String username, String password) {
+		String query = "INSERT INTO UserS (user_name,User_password) VALUES (?, ?)";
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement(query);
+			statement.setString(1,username);
+			statement.setString(2,password);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	public String addCondition(String condition) {
 		String query = loadQuery.concat(condition);
