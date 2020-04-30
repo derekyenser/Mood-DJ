@@ -69,8 +69,8 @@ public class CustomMoodController implements Initializable{
 		DBSongDAO database = MoodDJ.getDatabase();
 
 		String query = customMood.getCustomMoodQuery();
-		String usernameCondition = String.format(" and user_name = \"%s\"",username);
-		query += usernameCondition;
+		//String usernameCondition = String.format(" and user_name = \"%s\"",username);
+		//query += usernameCondition;
 
 		System.out.println(query);
 		ArrayList<Song> playlist =  new ArrayList<Song>();

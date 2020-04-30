@@ -32,7 +32,7 @@ public class SignUpPageController implements Initializable{
 		if(passwordMatch(password,confirmPassword)) {
 			DBSongDAO database = MoodDJ.getDatabase();
 			database.saveUser(username,password);
-			MoodDJ.loadPage("view/NewUserPreferencesPage.fxml", event);
+			MoodDJ.loadPage("view/GenrePreferencesPage.fxml", event);
 		} else {
 			errorLabel.setVisible(true);
 			System.out.println("Signup Unsuccessful");
