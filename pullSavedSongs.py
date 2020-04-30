@@ -82,6 +82,11 @@ def addToDB(cnx, info): #Adds all songs, attributes, and artists to the appropri
         songTuple = (song["id"], song["track"]) # Info for song table
         insertSong(songTuple, song["artist"], cnx) # Put song in songs table
         insertSHA(song["artist"], song["id"], cnx) # Link the artist and song in database
+        # Convert all 0's to major and 1's to minor to match database
+        if song['mode'] == 0:
+            song['mode'] = 'major'
+        elif song['mode'] == 1:
+            song['mode'] = 'minor'
         # Get all attributes for the song in one place
         attributeTuple = (round(song["acousticness"], 9), round(song["danceability"], 9), song["duration_ms"],
                     round(song["energy"], 9), song["instrumentalness"], song["key"], round(song["liveness"], 9),
@@ -322,7 +327,7 @@ def checkUser(cnx): # Check if a user is already in our database. If not, genera
         cursor.execute(sql_select_query) # Run the command
         record = cursor.fetchall() # Get all results of the query (Should only be one)
         for row in record:
-            if row[0] == None:
+            if row[0] == None or row[0] == 'null':
                 return False, 0
             else:
                 return False, row[0]+1
