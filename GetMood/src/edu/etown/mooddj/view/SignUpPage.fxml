@@ -50,6 +50,7 @@
                   </HBox>
                   <Label text="Confirm Password: " GridPane.rowIndex="3" />
                   <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="errorLabel" text="Passwords do not match" textFill="#e40000" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                </children>
             </GridPane>
          </children>

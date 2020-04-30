@@ -39,7 +39,54 @@ public class MoodSelectionController implements Initializable{
 	private Button danceBtn;
 	@FXML
 	private Button highEnergyBtn;
+	private String username;
 
+	public MoodSelectionController() {
+		
+	}
+	
+
+	public void getHappyPlaylist(ActionEvent event) {
+		String happyConditions = " and energy > '.75' "
+				+ "and valence > '.75' and mode_A = 'major' order by energy desc, valence desc";
+		getMoodPlaylist(event,happyConditions);
+	}
+	
+	public void getSadPlaylist(ActionEvent event) {
+		String sadConditions = " and energy < '.25'"
+				+ "and valence < '.25'"
+				+ "and danceability < '.25' and mode_A = 'minor' order by energy asc, valence asc, danceability asc ";
+		getMoodPlaylist(event,sadConditions);
+	}
+
+	public void getDancePlaylist(ActionEvent event) {
+		String danceConditions = " and danceability > '.75'"
+								 + "and valence > '.75' order by danceability desc, valence desc";
+		getMoodPlaylist(event,danceConditions);
+	}
+
+	public void getHighEnergyPlaylist(ActionEvent event) {
+		String energyConditions = " and energy > '.75' order by energy desc";
+		getMoodPlaylist(event,energyConditions);
+	}
+	
+	private void getMoodPlaylist(ActionEvent event, String conditions) {
+		DBSongDAO database = MoodDJ.getDatabase();
+		String loadQuery = database.getLoadSpotifyQuery();
+		String usernameCondition = String.format(" and user_name = \"%s\"",username);
+
+		loadQuery = database.addConditionSpotify(usernameCondition);
+		loadQuery = database.addConditionSpotify(conditions);
+		System.out.println(loadQuery);
+		ArrayList<Song> playlist =  new ArrayList<Song>();
+		playlist = database.loadSongs(loadQuery);
+		loadPlaylistPageAndSendPlaylist(event,playlist);
+	}
+	
+	public void getUsername(String username) {
+		this.username = username;
+	}
+	
 	/**
 	 * The method called to display the page for selecting a custom mood .
 	 * Currently called by the Button customMoodButton.
@@ -48,59 +95,24 @@ public class MoodSelectionController implements Initializable{
 	 */
 	public void loadCustomMoodPage(ActionEvent event) {
 		MoodDJ.loadPage("view/CustomMoodPage.fxml", event);
+//		try {
+//			FXMLLoader loader = new FXMLLoader();
+//			loader.setLocation(MoodDJ.class.getResource("view/CustomMoodPage.fxml"));
+//			Parent root = loader.load();
+//			CustomMoodController customMoodCtrl = loader.getController();
+//			customMoodCtrl.getUsername(username);
+//
+//			Scene scene = new Scene(root);
+//			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+//
+//			window.setScene(scene);
+//			window.show();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
-
-	public void getHappyPlaylist(ActionEvent event) {
-		String happyConditions = " and energy > '.75' "
-				+ "and valence > '.75' and mode_A = 'major' order by energy desc, valence desc";
-		DBSongDAO database = MoodDJ.getDatabase();
-		String loadQuery = database.getLoadQuery();
-
-		loadQuery = database.addCondition(happyConditions);
-		System.out.println(loadQuery);
-		ArrayList<Song> playlist =  new ArrayList<Song>();
-		playlist = database.loadSongs(loadQuery);
-		loadPlaylistPageAndSendPlaylist(event,playlist);
-	}
-	public void getSadPlaylist(ActionEvent event) {
-		String sadConditions = " and energy < '.25'"
-				+ "and valence < '.25'"
-				+ "and danceability < '.25' and mode_A = 'minor' order by energy asc, valence asc, danceability asc ";
-		DBSongDAO database = MoodDJ.getDatabase();
-		String loadQuery = database.getLoadQuery();
-
-		loadQuery = database.addCondition(sadConditions);
-		System.out.println(loadQuery);
-		ArrayList<Song> playlist =  new ArrayList<Song>();
-		playlist = database.loadSongs(loadQuery);
-		loadPlaylistPageAndSendPlaylist(event,playlist);
-	}
-
-	public void getDancePlaylist(ActionEvent event) {
-		String danceConditions = " and danceability > '.75'"
-								 + "and valence > '.75' order by danceability desc, valence desc";
-		DBSongDAO database = MoodDJ.getDatabase();
-		String loadQuery = database.getLoadQuery();
-
-		loadQuery =database.addCondition(danceConditions);
-		System.out.println(loadQuery);
-		ArrayList<Song> playlist =  new ArrayList<Song>();
-		playlist = database.loadSongs(loadQuery);
-		loadPlaylistPageAndSendPlaylist(event,playlist);
-	}
-
-	public void getHighEnergyPlaylist(ActionEvent event) {
-		String energyConditions = " and energy > '.75' order by energy desc";
-		DBSongDAO database = MoodDJ.getDatabase();
-		String loadQuery = database.getLoadQuery();
-
-		loadQuery = database.addCondition(energyConditions);
-		System.out.println(loadQuery);
-		ArrayList<Song> playlist =  new ArrayList<Song>();
-		playlist = database.loadSongs(loadQuery);
-		loadPlaylistPageAndSendPlaylist(event,playlist);
-	}
-
+	
 	public void loadPlaylistPageAndSendPlaylist(ActionEvent event, ArrayList<Song> list) {
 		try {
 			FXMLLoader loader = new FXMLLoader();

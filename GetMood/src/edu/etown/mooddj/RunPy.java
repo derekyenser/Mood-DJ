@@ -50,7 +50,7 @@ public class RunPy {
 		pipe("Done");
 	}
 
-	public void getUsername(String email) { // Parses the email to get the spotify username
+	public String getUsername(String email) { // Parses the email to get the spotify username
 		String temp = "";
 		int index = 0;
 		char c = email.charAt(index);
@@ -62,6 +62,7 @@ public class RunPy {
 		System.out.println(temp);
 
 		username = temp;
+		return username;
 	}
 
 	public void run() {

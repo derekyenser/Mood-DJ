@@ -21,11 +21,11 @@ public class LandingPageController implements Initializable{
 	
 	public void showSignInPage(ActionEvent event) {
 		MoodDJ.loadPage("view/SignInPage.fxml", event);
-		RunPy script = new RunPy("PythonScript\\dist\\pullSavedSongs.exe");
+		//RunPy script = new RunPy("PythonScript\\dist\\pullSavedSongs.exe");
 		//script.getDBCreds("sql9334219","FrqdgTsjLk","sql9.freemysqlhosting.net","sql9334219"); // Optional, if you have a DB set up on your computer you will want to use this
-		script.run();
+		//script.run();
 		
-		loadMoodSelectionPage(event);
+		//loadMoodSelectionPage(event);
 		
 	}
 	public void loadMoodSelectionPage(ActionEvent event) {

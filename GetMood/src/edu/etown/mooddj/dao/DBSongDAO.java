@@ -7,12 +7,14 @@ import edu.etown.mooddj.model.Song;
 
 public class DBSongDAO {
 	private Connection conn;
-	private String loadQuery;
+	private String loadSpotifyQuery;
 	public DBSongDAO() {
-		loadQuery = "select distinct track_name, "
+		loadSpotifyQuery = "select distinct track_name, "
 				+ "artists.artist_name "
-				+ "from Songs, attributes, artists, Genre "
-				+ "where Songs.song_num = attributes.song_num "
+				+ "from Songs, attributes, artists, Genre, playlist, UserS "
+				+ "where UserS.Users_id = playlist.user_id "  
+				+ "and playlist.song_num = Songs.song_num "
+				+ "and Songs.song_num = attributes.song_num "
 				+ "and attributes.genre_num = Genre.genre_num "
 				+ "and Genre.artist_name = artists.artist_name";
 	}
@@ -81,18 +83,18 @@ public class DBSongDAO {
 		}
 		
 	}
-	public String addCondition(String condition) {
-		String query = loadQuery.concat(condition);
+	public String addConditionSpotify(String condition) {
+		String query = loadSpotifyQuery.concat(condition);
 		return query;
 	}
 	public Connection getConnection() {
 		return conn;
 	}
-	public String getLoadQuery() {
-		return loadQuery;
+	public String getLoadSpotifyQuery() {
+		return loadSpotifyQuery;
 	}
-	public void setLoadQuery(String loadQuery) {
-		this.loadQuery = loadQuery;
+	public void setLoadSpotifyQuery(String loadQuery) {
+		this.loadSpotifyQuery = loadQuery;
 	}
 	
 }

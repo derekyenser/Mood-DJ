@@ -30,8 +30,12 @@ public class CustomMoodController implements Initializable{
 	private TextField energyTextField;
 	@FXML
 	private TextField danceabilityTextField;
+	private String username;
 
 
+	public CustomMoodController() {
+		
+	}
 	public void setValenceSliderValue(ActionEvent event) {
 		setSliderValue(valenceTextField,valenceSlider);
 	}
@@ -65,6 +69,8 @@ public class CustomMoodController implements Initializable{
 		DBSongDAO database = MoodDJ.getDatabase();
 
 		String query = customMood.getCustomMoodQuery();
+		String usernameCondition = String.format(" and user_name = \"%s\"",username);
+		query += usernameCondition;
 
 		System.out.println(query);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
@@ -92,7 +98,11 @@ public class CustomMoodController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void getUsername(String username) {
+		this.username = username;
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 

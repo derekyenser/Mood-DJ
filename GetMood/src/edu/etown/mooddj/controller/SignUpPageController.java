@@ -12,11 +12,13 @@ import javafx.scene.control.*;
 
 public class SignUpPageController implements Initializable{
 	@FXML
-	TextField usernameField;
+	private TextField usernameField;
 	@FXML
-	PasswordField passwordField;
+	private PasswordField passwordField;
 	@FXML
-	PasswordField confirmPasswordField;
+	private PasswordField confirmPasswordField;
+	@FXML
+	private Label errorLabel;
 	
 	public void loadNewUserPage(ActionEvent event) {
 		MoodDJ.loadPage("view/NewUserPage.fxml", event);
@@ -32,6 +34,7 @@ public class SignUpPageController implements Initializable{
 			database.saveUser(username,password);
 			MoodDJ.loadPage("view/NewUserPreferencesPage.fxml", event);
 		} else {
+			errorLabel.setVisible(true);
 			System.out.println("Signup Unsuccessful");
 		}
 		
