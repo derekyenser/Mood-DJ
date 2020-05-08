@@ -134,6 +134,7 @@ public class MoodSelectionController implements Initializable{
 					Parent root = loader.load();
 					CustomMoodController customMoodCtrl = loader.getController();
 					customMoodCtrl.getUsername(username);
+					customMoodCtrl.getGenrePrefs(genrePrefs);
 		
 					Scene scene = new Scene(root);
 					Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

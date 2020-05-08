@@ -9,6 +9,7 @@ import edu.etown.mooddj.*;
 import edu.etown.mooddj.dao.DBSongDAO;
 import edu.etown.mooddj.model.Song;
 import javafx.beans.value.*;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.Node;
@@ -31,6 +32,7 @@ public class CustomMoodController implements Initializable{
 	@FXML
 	private TextField danceabilityTextField;
 	private String username;
+	private ObservableList<String> genrePrefs;
 
 
 	public CustomMoodController() {
@@ -81,6 +83,15 @@ public class CustomMoodController implements Initializable{
 			customMood.setEnergy(energy);
 			customMood.setDanceability(danceability);
 			query += customMood.getConditions();
+			String genreConditions = " and (";
+			Iterator<String> genreItr = genrePrefs.iterator();
+			genreConditions += String.format("song_genre = \"%s\"",genreItr.next());
+			while(genreItr.hasNext()) {
+				genreConditions += String.format(" or song_genre = \"%s\"",genreItr.next());
+				//System.out.println(genre.toString());
+			}
+			genreConditions += ")";
+			query += genreConditions;
 		}
 		System.out.println(query);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
@@ -111,6 +122,12 @@ public class CustomMoodController implements Initializable{
 	
 	public void getUsername(String username) {
 		this.username = username;
+	}
+	public void getGenrePrefs(ObservableList<String> genrePrefs) {
+		this.genrePrefs = genrePrefs;
+		for(Object o : genrePrefs) {
+			System.out.println(o.toString());
+		}
 	}
 	
 	@Override
