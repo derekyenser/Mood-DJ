@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import edu.etown.mooddj.MoodDJ;
 import edu.etown.mooddj.dao.DBSongDAO;
+import edu.etown.mooddj.model.UserInfo;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,10 +40,11 @@ public class GenrePreferencesController implements Initializable{
 
 			MoodSelectionController moodSelectionCtrl = loader.getController();
 			ObservableList<String> genrePrefs= genreListView.getItems();
-			moodSelectionCtrl.getGenrePrefs(genrePrefs);
-
-			DBSongDAO database = MoodDJ.getDatabase();
-			database.setIsSpotifyUser(false);
+			
+			UserInfo userInfo = MoodDJ.getUserInfo();
+			userInfo.setGenrePrefs(genrePrefs);
+			
+			userInfo.setIsSpotifyUser(false);
 
 			Scene scene = new Scene(root);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

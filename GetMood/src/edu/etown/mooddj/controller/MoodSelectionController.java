@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import edu.etown.mooddj.MoodDJ;
 import edu.etown.mooddj.dao.DBSongDAO;
 import edu.etown.mooddj.model.Song;
+import edu.etown.mooddj.model.UserInfo;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,16 +78,21 @@ public class MoodSelectionController implements Initializable{
 
 	private void getMoodPlaylist(ActionEvent event, String conditions) {
 		DBSongDAO database = MoodDJ.getDatabase();
+		UserInfo userInfo = MoodDJ.getUserInfo();
 		String loadQuery;
-		if(database.isSpotifyUser()) {
+		if(userInfo.isSpotifyUser()) {
 			loadQuery = database.getLoadSpotifyQuery();
+			username = userInfo.getUsername();
 			String usernameCondition = String.format(" and user_name = \"%s\"",username);
 
-			loadQuery = database.addConditionSpotify(usernameCondition);
-			loadQuery = database.addConditionSpotify(conditions);
+			loadQuery += usernameCondition;
+			loadQuery += conditions;
+//			loadQuery = database.addConditionSpotify(usernameCondition);
+//			loadQuery = database.addConditionSpotify(conditions);
 		} else {
 			loadQuery = database.getLoadQuery();
 			String genreConditions = " and (";
+			genrePrefs = userInfo.getGenrePrefs();
 			Iterator<String> genreItr = genrePrefs.iterator();
 			genreConditions += String.format("song_genre = \"%s\"",genreItr.next());
 			while(genreItr.hasNext()) {
@@ -134,7 +140,7 @@ public class MoodSelectionController implements Initializable{
 					Parent root = loader.load();
 					CustomMoodController customMoodCtrl = loader.getController();
 					customMoodCtrl.getUsername(username);
-					customMoodCtrl.getGenrePrefs(genrePrefs);
+					//customMoodCtrl.getGenrePrefs(genrePrefs);
 		
 					Scene scene = new Scene(root);
 					Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

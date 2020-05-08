@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.*;
 
 import edu.etown.mooddj.dao.DBSongDAO;
+import edu.etown.mooddj.model.UserInfo;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ public class MoodDJ extends Application {
 	private Stage primaryStage;
 	public static Connection conn = null;
 	private static DBSongDAO database;
+	private static UserInfo userInfo;
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -87,7 +89,11 @@ public class MoodDJ extends Application {
 	public static DBSongDAO getDatabase() {
 		return database;
 	}
-
+	
+	public static UserInfo getUserInfo() {
+		return userInfo;
+	}
+	
 	public static void main(String[] args) {
 //		String user = "root";
 //		String password = "246501@lP";
@@ -103,6 +109,8 @@ public class MoodDJ extends Application {
 		
 		database = new DBSongDAO();
 		database.establishConnection(databaseURL,user,password);
+		
+		userInfo = new UserInfo();
 		
 		Application.launch(args);
 	}

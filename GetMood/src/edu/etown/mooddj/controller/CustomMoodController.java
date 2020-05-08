@@ -8,6 +8,7 @@ import java.util.*;
 import edu.etown.mooddj.*;
 import edu.etown.mooddj.dao.DBSongDAO;
 import edu.etown.mooddj.model.Song;
+import edu.etown.mooddj.model.UserInfo;
 import javafx.beans.value.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,25 +66,23 @@ public class CustomMoodController implements Initializable{
 		double danceability = danceabilitySlider.getValue();
 		CustomMood customMood = new CustomMood();
 		DBSongDAO database = MoodDJ.getDatabase();
+		UserInfo userInfo = MoodDJ.getUserInfo();
 		String query;
-
-		//query = customMood.getCustomMoodQuery();
-		if(database.isSpotifyUser()) {
+		customMood.setValence(valence);
+		customMood.setEnergy(energy);
+		customMood.setDanceability(danceability);
+		
+		if(userInfo.isSpotifyUser()) {
 			query = database.getLoadSpotifyQuery();
-			customMood.setValence(valence);
-			customMood.setEnergy(energy);
-			customMood.setDanceability(danceability);
 			query += customMood.getConditions();
-					
+			username = userInfo.getUsername();
 			String usernameCondition = String.format(" and user_name = \"%s\"",username);
 			query += usernameCondition;
 		} else {
 			query = database.getLoadQuery();
-			customMood.setValence(valence);
-			customMood.setEnergy(energy);
-			customMood.setDanceability(danceability);
 			query += customMood.getConditions();
 			String genreConditions = " and (";
+			genrePrefs = userInfo.getGenrePrefs();
 			Iterator<String> genreItr = genrePrefs.iterator();
 			genreConditions += String.format("song_genre = \"%s\"",genreItr.next());
 			while(genreItr.hasNext()) {

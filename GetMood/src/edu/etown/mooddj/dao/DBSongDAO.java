@@ -9,9 +9,8 @@ public class DBSongDAO {
 	private Connection conn;
 	private String loadQuery;
 	private String loadSpotifyQuery;
-	private boolean isSpotifyUser;
+
 	public DBSongDAO() {
-		isSpotifyUser = false;
 		loadQuery = "select distinct track_name, "
 				+ "artists.artist_name "
 				+ "from Songs, attributes, artists, Genre "
@@ -116,10 +115,5 @@ public class DBSongDAO {
 		return loadQuery;
 	}
 	
-	public void setIsSpotifyUser(boolean isSpotifyUser) {
-		this.isSpotifyUser = isSpotifyUser;
-	}
-	public boolean isSpotifyUser() {
-		return isSpotifyUser;
-	}
+
 }
