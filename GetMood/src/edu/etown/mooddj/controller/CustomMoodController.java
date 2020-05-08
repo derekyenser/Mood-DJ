@@ -65,14 +65,16 @@ public class CustomMoodController implements Initializable{
 		customMood.setValence(valence);
 		customMood.setEnergy(energy);
 		customMood.setDanceability(danceability);
-		customMood.setOrderConditions();
+//		customMood.setOrderConditions();
 		
 		DBSongDAO database = MoodDJ.getDatabase();
-
-		String query = customMood.getCustomMoodQuery();
-		//String usernameCondition = String.format(" and user_name = \"%s\"",username);
-		//query += usernameCondition;
-
+		String query;
+		
+		query = customMood.getCustomMoodQuery();
+		if(database.isSpotifyUser()) {
+			String usernameCondition = String.format(" and user_name = \"%s\"",username);
+			query += usernameCondition;
+		} 
 		System.out.println(query);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
 		playlist = database.loadSongs(query);

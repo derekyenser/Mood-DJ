@@ -9,13 +9,15 @@ public class DBSongDAO {
 	private Connection conn;
 	private String loadQuery;
 	private String loadSpotifyQuery;
+	private boolean isSpotifyUser;
 	public DBSongDAO() {
+		isSpotifyUser = false;
 		loadQuery = "select distinct track_name, "
 				+ "artists.artist_name "
-				+ "from Songs, attributes, artists, Genre, "
+				+ "from Songs, attributes, artists, Genre "
 				+ "where Songs.song_num = attributes.song_num "
 				+ "and attributes.genre_num = Genre.genre_num "
-				+ "and Genre.artist_name = artists.artist_name";
+				+ "and Genre.artist_name = artists.artist_name ";
 		
 		loadSpotifyQuery = "select distinct track_name, "
 				+ "artists.artist_name "
@@ -91,12 +93,13 @@ public class DBSongDAO {
 		}
 		
 	}
+	public Connection getConnection() {
+		return conn;
+	}
+	
 	public String addConditionSpotify(String condition) {
 		String query = loadSpotifyQuery.concat(condition);
 		return query;
-	}
-	public Connection getConnection() {
-		return conn;
 	}
 	public String getLoadSpotifyQuery() {
 		return loadSpotifyQuery;
@@ -105,4 +108,18 @@ public class DBSongDAO {
 		this.loadSpotifyQuery = loadQuery;
 	}
 	
+	public String addCondition(String condition) {
+		String query = loadQuery.concat(condition);
+		return query;
+	}
+	public String getLoadQuery() {
+		return loadQuery;
+	}
+	
+	public void setIsSpotifyUser(boolean isSpotifyUser) {
+		this.isSpotifyUser = isSpotifyUser;
+	}
+	public boolean isSpotifyUser() {
+		return isSpotifyUser;
+	}
 }

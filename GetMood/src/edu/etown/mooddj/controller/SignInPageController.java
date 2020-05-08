@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import edu.etown.mooddj.MoodDJ;
 import edu.etown.mooddj.RunPy;
+import edu.etown.mooddj.dao.DBSongDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +46,8 @@ public class SignInPageController implements Initializable{
 
 			MoodSelectionController moodSelectionCtrl = loader.getController();
 			moodSelectionCtrl.getUsername(username);
+			DBSongDAO database = MoodDJ.getDatabase();
+			database.setIsSpotifyUser(true);
 
 			Scene scene = new Scene(root);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
