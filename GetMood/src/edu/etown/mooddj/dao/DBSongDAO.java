@@ -7,8 +7,16 @@ import edu.etown.mooddj.model.Song;
 
 public class DBSongDAO {
 	private Connection conn;
+	private String loadQuery;
 	private String loadSpotifyQuery;
 	public DBSongDAO() {
+		loadQuery = "select distinct track_name, "
+				+ "artists.artist_name "
+				+ "from Songs, attributes, artists, Genre, "
+				+ "where Songs.song_num = attributes.song_num "
+				+ "and attributes.genre_num = Genre.genre_num "
+				+ "and Genre.artist_name = artists.artist_name";
+		
 		loadSpotifyQuery = "select distinct track_name, "
 				+ "artists.artist_name "
 				+ "from Songs, attributes, artists, Genre, playlist, UserS "

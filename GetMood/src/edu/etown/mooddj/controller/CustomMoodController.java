@@ -65,6 +65,7 @@ public class CustomMoodController implements Initializable{
 		customMood.setValence(valence);
 		customMood.setEnergy(energy);
 		customMood.setDanceability(danceability);
+		customMood.setOrderConditions();
 		
 		DBSongDAO database = MoodDJ.getDatabase();
 

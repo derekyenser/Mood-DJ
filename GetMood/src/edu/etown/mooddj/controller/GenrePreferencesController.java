@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.etown.mooddj.MoodDJ;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +25,10 @@ public class GenrePreferencesController implements Initializable{
 		genreListView.getItems().add(value);
 	}
 	public void loadMoodSelectionPage(ActionEvent event){
+		ObservableList<String> genrePrefs= genreListView.getItems();
+		for(Object o : genrePrefs) {
+			System.out.println(o.toString());
+		}
 		MoodDJ.loadPage("view/MoodSelectionPage.fxml", event);
 	}
 	public void populateCombobox(ComboBox<String> combobox) {

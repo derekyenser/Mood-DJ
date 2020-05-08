@@ -32,9 +32,12 @@ public class CustomMood {
 	}
 
 	public void setDanceability(double value) {
-		customMoodQuery += danceabilityQuery(value) + " order by " + orderQuery;
+		customMoodQuery += danceabilityQuery(value);
 	}
 
+	public void setOrderConditions() {
+		customMoodQuery += " order by " + orderQuery;
+	}
 	public void endQuery() {
 		customMoodQuery +=";";
 	}
