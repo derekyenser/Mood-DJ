@@ -10,8 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 
 
 public class MoodDJ extends Application {
@@ -23,9 +22,7 @@ public class MoodDJ extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
-		//loadInitialScreen("view/MoodSelectionPage.fxml",primaryStage);
 		loadInitialScreen("view/LandingPage.fxml",primaryStage);
-		//loadInitialScreen("view/CustomMoodPage.fxml",primaryStage);
 
 	}
 
@@ -61,7 +58,6 @@ public class MoodDJ extends Application {
 			window.setScene(scene);
 			window.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -95,14 +91,6 @@ public class MoodDJ extends Application {
 	}
 	
 	public static void main(String[] args) {
-//		String user = "root";
-//		String password = "246501@lP";
-//		String databaseURL = "jdbc:mysql://localhost:3306/mooddj";
-		
-//		RunPy script = new RunPy("PythonScript\\dist\\pullSavedSongs.exe");
-//		script.getDBCreds(); // Optional, if you have a DB set up on your computer you will want to use this
-//		script.run();
-		
 		String user = "sql9334219";
 		String password = "FrqdgTsjLk";
 		String databaseURL = "jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9334219";

@@ -2,30 +2,18 @@ package edu.etown.mooddj.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.ResourceBundle;
-
+import java.util.*;
 
 import edu.etown.mooddj.MoodDJ;
 import edu.etown.mooddj.dao.DBSongDAO;
-import edu.etown.mooddj.model.Song;
-import edu.etown.mooddj.model.UserInfo;
+import edu.etown.mooddj.model.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class MoodSelectionController implements Initializable{
@@ -45,7 +33,6 @@ public class MoodSelectionController implements Initializable{
 	private Button highEnergyBtn;
 	private String username;
 	private ObservableList<String> genrePrefs;
-	private boolean isSpotifyUser = false;
 
 	public MoodSelectionController() {
 
@@ -61,7 +48,8 @@ public class MoodSelectionController implements Initializable{
 	public void getSadPlaylist(ActionEvent event) {
 		String sadConditions = " and energy < '.25'"
 				+ "and valence < '.25'"
-				+ "and danceability < '.25' and mode_A = 'minor' order by energy asc, valence asc, danceability asc ";
+				+ "and danceability < '.25' and mode_A = 'minor' "
+				+ "order by energy asc, valence asc, danceability asc ";
 		getMoodPlaylist(event,sadConditions);
 	}
 
@@ -87,8 +75,6 @@ public class MoodSelectionController implements Initializable{
 
 			loadQuery += usernameCondition;
 			loadQuery += conditions;
-//			loadQuery = database.addConditionSpotify(usernameCondition);
-//			loadQuery = database.addConditionSpotify(conditions);
 		} else {
 			loadQuery = database.getLoadQuery();
 			String genreConditions = " and (";
@@ -97,14 +83,11 @@ public class MoodSelectionController implements Initializable{
 			genreConditions += String.format("song_genre = \"%s\"",genreItr.next());
 			while(genreItr.hasNext()) {
 				genreConditions += String.format(" or song_genre = \"%s\"",genreItr.next());
-				//System.out.println(genre.toString());
 			}
 			genreConditions += ")";
 			loadQuery = database.getLoadQuery();
 			loadQuery += genreConditions;
 			loadQuery += conditions;
-//			loadQuery = database.addCondition(genreConditions);
-//			loadQuery = database.addCondition(conditions);
 		}
 		System.out.println(loadQuery);
 		ArrayList<Song> playlist =  new ArrayList<Song>();
@@ -122,9 +105,6 @@ public class MoodSelectionController implements Initializable{
 			System.out.println(o.toString());
 		}
 	}
-	public void setIsSpotifyUser(boolean isSpotifyUser) {
-		this.isSpotifyUser = isSpotifyUser;
-	}
 
 	/**
 	 * The method called to display the page for selecting a custom mood .
@@ -133,24 +113,8 @@ public class MoodSelectionController implements Initializable{
 	 * @return Nothing
 	 */
 	public void loadCustomMoodPage(ActionEvent event) {
-		//MoodDJ.loadPage("view/CustomMoodPage.fxml", event);
-				try {
-					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(MoodDJ.class.getResource("view/CustomMoodPage.fxml"));
-					Parent root = loader.load();
-					CustomMoodController customMoodCtrl = loader.getController();
-					customMoodCtrl.getUsername(username);
-					//customMoodCtrl.getGenrePrefs(genrePrefs);
-		
-					Scene scene = new Scene(root);
-					Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-		
-					window.setScene(scene);
-					window.show();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		MoodDJ.loadPage("view/CustomMoodPage.fxml", event);
+	
 	}
 
 	public void loadPlaylistPageAndSendPlaylist(ActionEvent event, ArrayList<Song> list) {

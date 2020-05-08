@@ -1,8 +1,6 @@
 
 package edu.etown.mooddj;
 
-import java.util.Scanner;
-
 public class CustomMood {
 		final private String baseQuery = "select distinct track_name, "
 				+ "artists.artist_name "
@@ -45,9 +43,6 @@ public class CustomMood {
 	}
 	public void setOrderConditions() {
 		customMoodQuery += " order by " + orderQuery;
-	}
-	public void endQuery() {
-		customMoodQuery +=";";
 	}
 
 	private String valenceQuery(double value) {

@@ -16,7 +16,7 @@
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Select your favorite genres" />
             <HBox alignment="CENTER" spacing="17.0">
                <children>
-                  <ComboBox fx:id="genreBox" prefHeight="25.0" prefWidth="262.0" promptText="Choose Genre" />
+                  <ComboBox fx:id="genreBox" prefHeight="30.0" prefWidth="262.0" promptText="Choose Genre" />
                   <Button mnemonicParsing="false" onAction="#addGenre" text="Add" />
                </children>
             </HBox>

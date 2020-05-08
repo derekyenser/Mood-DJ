@@ -7,15 +7,12 @@ import java.util.*;
 
 import edu.etown.mooddj.*;
 import edu.etown.mooddj.dao.DBSongDAO;
-import edu.etown.mooddj.model.Song;
-import edu.etown.mooddj.model.UserInfo;
+import edu.etown.mooddj.model.*;
 import javafx.beans.value.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -87,7 +84,6 @@ public class CustomMoodController implements Initializable{
 			genreConditions += String.format("song_genre = \"%s\"",genreItr.next());
 			while(genreItr.hasNext()) {
 				genreConditions += String.format(" or song_genre = \"%s\"",genreItr.next());
-				//System.out.println(genre.toString());
 			}
 			genreConditions += ")";
 			query += genreConditions;
