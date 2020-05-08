@@ -127,23 +127,23 @@ public class MoodSelectionController implements Initializable{
 	 * @return Nothing
 	 */
 	public void loadCustomMoodPage(ActionEvent event) {
-		MoodDJ.loadPage("view/CustomMoodPage.fxml", event);
-		//		try {
-		//			FXMLLoader loader = new FXMLLoader();
-		//			loader.setLocation(MoodDJ.class.getResource("view/CustomMoodPage.fxml"));
-		//			Parent root = loader.load();
-		//			CustomMoodController customMoodCtrl = loader.getController();
-		//			customMoodCtrl.getUsername(username);
-		//
-		//			Scene scene = new Scene(root);
-		//			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-		//
-		//			window.setScene(scene);
-		//			window.show();
-		//		} catch (IOException e) {
-		//			// TODO Auto-generated catch block
-		//			e.printStackTrace();
-		//		}
+		//MoodDJ.loadPage("view/CustomMoodPage.fxml", event);
+				try {
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(MoodDJ.class.getResource("view/CustomMoodPage.fxml"));
+					Parent root = loader.load();
+					CustomMoodController customMoodCtrl = loader.getController();
+					customMoodCtrl.getUsername(username);
+		
+					Scene scene = new Scene(root);
+					Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+					window.setScene(scene);
+					window.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 
 	public void loadPlaylistPageAndSendPlaylist(ActionEvent event, ArrayList<Song> list) {

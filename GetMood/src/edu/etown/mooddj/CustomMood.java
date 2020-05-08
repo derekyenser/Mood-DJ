@@ -11,6 +11,7 @@ public class CustomMood {
 				+ "and attributes.genre_num = Genre.genre_num "
 				+ "and Genre.artist_name = artists.artist_name";;
 		private String customMoodQuery;
+		private String conditions = "";
 		private String orderQuery = " ";
 		private int i = 0;
 
@@ -22,19 +23,26 @@ public class CustomMood {
 	public String getCustomMoodQuery() {
 		return customMoodQuery;
 	}
+	
+	public String getConditions() {
+		return conditions;
+	}
 
 	public void setValence(double value) {
-		customMoodQuery += valenceQuery(value);
+		conditions += valenceQuery(value);
 	}
 
 	public void setEnergy(double value) {
-		customMoodQuery += energyQuery(value);
+		conditions += energyQuery(value);
 	}
 
 	public void setDanceability(double value) {
-		customMoodQuery += danceabilityQuery(value);
+		conditions += danceabilityQuery(value);
 	}
 
+	public String getOrderConditions() {
+		return orderQuery;
+	}
 	public void setOrderConditions() {
 		customMoodQuery += " order by " + orderQuery;
 	}
