@@ -1,18 +1,15 @@
 package edu.etown.mooddj.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.etown.mooddj.MoodDJ;
 import javafx.event.ActionEvent;
-import javafx.fxml.*;
-import javafx.scene.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
-public class NewUserPageController implements Initializable{
+public class ChooseSignInPageController implements Initializable{
 	@FXML
 	private Button loginSpotifyBtn;
 	@FXML
@@ -23,9 +20,12 @@ public class NewUserPageController implements Initializable{
 	 * @param event
 	 * @return Nothing
 	 */
-	public void loadSignUpPage(ActionEvent event) {
-		MoodDJ.loadPage("view/SignUpPage.fxml", event);
+	public void loadSignInPage(ActionEvent event) {
+		MoodDJ.loadPage("view/SignInPage.fxml", event);
 		
+	}
+	public void loadNSSignInPage(ActionEvent event) {
+		MoodDJ.loadPage("view/NSSignInPage.fxml", event);
 	}
 	public void loadLandingPage(ActionEvent event) {
 		MoodDJ.loadPage("view/LandingPage.fxml",event);

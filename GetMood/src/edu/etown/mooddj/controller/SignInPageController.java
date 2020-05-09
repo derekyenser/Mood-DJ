@@ -23,8 +23,8 @@ public class SignInPageController implements Initializable{
 		script.run();
 		loadMoodSelectionPage(event, username);
 	}
-	public void loadLandingPage(ActionEvent event) {
-		MoodDJ.loadPage("view/LandingPage.fxml",event);
+	public void loadChooseSignInPage(ActionEvent event) {
+		MoodDJ.loadPage("view/ChooseSignInPage.fxml",event);
 	}
 	public void loadMoodSelectionPage(ActionEvent event, String username) {
 		UserInfo userInfo = MoodDJ.getUserInfo();

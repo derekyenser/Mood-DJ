@@ -7,8 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane prefHeight="361.0" prefWidth="528.0" styleClass="background" stylesheets="@mooddj.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.etown.mooddj.controller.NewUserPageController">
+<Pane prefHeight="361.0" prefWidth="528.0" styleClass="background" stylesheets="@mooddj.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.etown.mooddj.controller.ChooseSignInPageController">
    <children>
       <Text fill="WHITE" layoutX="165.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mood DJ">
          <font>
@@ -17,8 +16,8 @@
       </Text>
       <VBox alignment="CENTER" layoutX="186.0" layoutY="181.0" spacing="8.0">
          <children>
-            <Button fx:id="loginSpotifyBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" text="Login With Spotify" />
-            <Button fx:id="newAccountBtn" mnemonicParsing="false" onAction="#loadSignUpPage" prefHeight="25.0" prefWidth="141.0" text="Create New Account" />
+            <Button fx:id="loginSpotifyBtn" mnemonicParsing="false" onAction="#loadSignInPage" prefHeight="26.0" prefWidth="141.0" text="Login With Spotify" />
+            <Button fx:id="newAccountBtn" mnemonicParsing="false" onAction="#loadNSSignInPage" prefHeight="25.0" prefWidth="141.0" text="Login Without Spotify" />
             <Button mnemonicParsing="false" onAction="#loadLandingPage" styleClass="circle-button" text="&lt;">
                <padding>
                   <Insets bottom="3.0" right="1.0" />

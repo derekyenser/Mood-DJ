@@ -92,6 +92,24 @@ public class DBSongDAO {
 		}
 		
 	}
+	public boolean selectUser(String username, String password) {
+		String query = "SELECT user_name,User_password FROM UserS where user_name = ? and User_password = ?";
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement(query);
+			statement.setString(1, username);
+			statement.setString(2, password);
+			ResultSet result = statement.executeQuery();
+			if(!result.next()) {
+				return false;
+			} 
+			
+			
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		return true;
+	}
 	public Connection getConnection() {
 		return conn;
 	}

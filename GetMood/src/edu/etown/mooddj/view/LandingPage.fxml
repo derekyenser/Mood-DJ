@@ -6,7 +6,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="361.0" maxWidth="528.0" minHeight="361.0" minWidth="528.0" prefHeight="361.0" prefWidth="528.0" styleClass="background" stylesheets="@mooddj.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.etown.mooddj.controller.LandingPageController">
    <children>
       <Text fill="#e8e8e8" layoutX="165.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mood DJ" textAlignment="CENTER" wrappingWidth="196.033203125">
@@ -16,8 +15,8 @@
       </Text>
       <VBox alignment="CENTER" layoutX="228.0" layoutY="181.0" spacing="8.0">
          <children>
-            <Button fx:id="LoginBtn" mnemonicParsing="false" onAction="#showSignInPage" prefHeight="26.0" prefWidth="71.0" text="Login" />
-            <Button fx:id="SignUpBtn" mnemonicParsing="false" onAction="#showNewUserPage" prefHeight="25.0" prefWidth="71.0" text="Sign Up" />
+            <Button fx:id="LoginBtn" mnemonicParsing="false" onAction="#showChooseSignInPage" prefHeight="26.0" prefWidth="71.0" text="Login" />
+            <Button fx:id="SignUpBtn" mnemonicParsing="false" onAction="#showSignUpPage" prefHeight="25.0" prefWidth="71.0" text="Sign Up" />
          </children>
       </VBox>
    </children>

@@ -20,8 +20,8 @@ public class SignUpPageController implements Initializable{
 	@FXML
 	private Label errorLabel;
 	
-	public void loadNewUserPage(ActionEvent event) {
-		MoodDJ.loadPage("view/NewUserPage.fxml", event);
+	public void loadLandingPage(ActionEvent event) {
+		MoodDJ.loadPage("view/LandingPage.fxml", event);
 
 	}
 	

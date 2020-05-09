@@ -15,13 +15,12 @@ public class LandingPageController implements Initializable{
 	@FXML
 	private Button SignUpBtn;
 	
-	public void showSignInPage(ActionEvent event) {
-		//MoodDJ.loadPage("view/SignInPage.fxml", event);
-		MoodDJ.loadPage("view/NewUserPage.fxml", event);
+	public void showChooseSignInPage(ActionEvent event) {
+		MoodDJ.loadPage("view/ChooseSignInPage.fxml", event);
+
 	}
 	
-	public void showNewUserPage(ActionEvent event) {
-		//MoodDJ.loadPage("view/NewUserPage.fxml", event);
+	public void showSignUpPage(ActionEvent event) {
 		MoodDJ.loadPage("view/SignUpPage.fxml", event);
 	}
 	

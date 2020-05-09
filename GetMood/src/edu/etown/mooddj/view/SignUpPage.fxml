@@ -55,7 +55,7 @@
             </GridPane>
          </children>
       </VBox>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadNewUserPage" styleClass="circle-button" text="&lt;" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadLandingPage" styleClass="circle-button" text="&lt;" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <padding>
             <Insets bottom="3.0" right="1.0" />
          </padding>
